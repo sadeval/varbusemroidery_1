@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="uk" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101112">
+  <link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=4">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=4">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=4">
+  <meta name="description" content="Роботи студії VARBUS: машинна вишивка на одязі, текстилі та мерчі. Фото і відео реальних проєктів.">
+  <title>VARBUS — наші роботи</title>
+
+  <!-- Tailwind CSS. Для робочого сайту рекомендовано зібрати стилі локально. -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#101112',
+            panel: '#191a1d',
+            gold: '#c7a574',
+            muted: '#a5a5ad'
+          },
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif'],
+            display: ['Unbounded', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+
+  <style>
+    :root { color-scheme: dark; }
+    * { -webkit-tap-highlight-color: transparent; }
+    body { overflow-x: hidden; }
+    ::selection { background: #c7a574; color: #101112; }
+    section[id], footer[id], form[id] { scroll-margin-top: 100px; }
+
+    .shell { width: min(1280px, calc(100% - 48px)); margin-inline: auto; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 10px; font-weight: 800; color: #c7a574;
+      letter-spacing: .18em; text-transform: uppercase;
+    }
+    .eyebrow::before { content: ''; width: 25px; height: 1px; background: currentColor; }
+    .section-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(25px, 3.4vw, 43px);
+      line-height: 1.35; letter-spacing: -.045em;
+    }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 48px; gap: 10px; padding: 13px 21px;
+      border-radius: 8px; font-size: 12px; font-weight: 800;
+      transition: transform .2s, background .2s, border-color .2s;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button-gold { color: #101112; background: #c7a574; }
+    .button-gold:hover { background: #dfbd8f; }
+    .button-outline { border: 1px solid #ffffff22; background: #ffffff03; }
+    .button-outline:hover { border-color: #c7a57488; background: #c7a5740b; }
+    .social-icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; border: 1px solid #ffffff18;
+      border-radius: 8px; color: #c7a574;
+      transition: background .2s, border-color .2s;
+    }
+    .social-icon:hover { background: #c7a57412; border-color: #c7a57477; }
+    :focus-visible { outline: 2px solid #dfbd8f; outline-offset: 4px; }
+
+    .portfolio-card { position: relative; overflow: hidden; background: #191a1d; border-radius: 12px; }
+    .portfolio-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s; }
+    .portfolio-card:hover img { transform: scale(1.08); }
+
+    .gallery-head {
+      display: flex; justify-content: space-between; align-items: end;
+      flex-wrap: wrap; gap: 16px 20px; margin-bottom: 28px;
+    }
+    .filters { display: flex; flex-wrap: wrap; gap: 7px; }
+    .filter {
+      border: 1px solid #ffffff22; background: #ffffff03; color: #a5a5ad;
+      border-radius: 999px; padding: 9px 15px; cursor: pointer;
+      font-family: inherit; font-size: 13px; line-height: 1.2;
+      transition: background .2s, color .2s, border-color .2s;
+    }
+    .filter:hover, .filter.active { background: #c7a574; color: #101112; border-color: #c7a574; }
+    .gallery {
+      display: grid; grid-template-columns: 1fr; gap: 18px;
+    }
+    .gallery .portfolio-card { aspect-ratio: 4 / 3; }
+    .gallery-message {
+      grid-column: 1 / -1; margin: 0; padding: 28px;
+      border: 1px solid #ffffff14; border-radius: 14px;
+      color: #a5a5ad; text-align: center; font-size: 13px;
+    }
+    .photos-badge {
+      position: absolute; top: 10px; right: 10px; z-index: 1;
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 5px 9px; border-radius: 999px;
+      background: rgba(16, 17, 18, 0.82); border: 1px solid #ffffff24;
+      color: #f5f5f5; font-size: 11px; font-weight: 700;
+      pointer-events: none; backdrop-filter: blur(4px);
+    }
+    .portfolio-card:focus-visible { outline: 2px solid #dfbd8f; outline-offset: 2px; }
+
+    .lightbox {
+      position: fixed; inset: 0; z-index: 200;
+      display: none; flex-direction: column; align-items: center; justify-content: center;
+      background: rgba(10, 11, 12, 0.93); padding: 24px;
+      text-align: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: min(1200px, 92vw); max-height: 74vh; width: auto; height: auto;
+      border-radius: 10px; object-fit: contain;
+    }
+    .lightbox-caption { margin-top: 16px; text-align: center; }
+    .lightbox-caption h3 { margin: 0; font-size: 16px; font-weight: 700; }
+    .lightbox-caption p { margin: 4px 0 0; font-size: 13px; color: #a5a5ad; }
+    .lightbox-close, .lightbox-nav {
+      position: absolute; display: flex; align-items: center; justify-content: center;
+      border-radius: 999px; cursor: pointer;
+      color: #f5f5f5; background: rgba(255, 255, 255, 0.06);
+      border: 1px solid #ffffff22; transition: background .2s, border-color .2s, transform .2s;
+    }
+    .lightbox-close:hover, .lightbox-nav:hover { background: #c7a574; color: #101112; border-color: #c7a574; }
+    .lightbox-close { top: 20px; right: 20px; width: 44px; height: 44px; font-size: 22px; line-height: 1; }
+    .lightbox-nav { top: 50%; transform: translateY(-50%); width: 46px; height: 46px; font-size: 22px; line-height: 1; }
+    .lightbox-prev { left: 16px; }
+    .lightbox-next { right: 16px; }
+    .lightbox-count {
+      position: absolute; top: 32px; left: 50%; transform: translateX(-50%);
+      font-size: 13px; color: #a5a5ad;
+    }
+    .lightbox video {
+      max-width: min(1100px, 94vw); max-height: 78vh; width: auto; height: auto;
+      border-radius: 10px; background: #000;
+    }
+    .lightbox iframe {
+      width: min(1100px, 94vw); max-height: 78vh; aspect-ratio: 16 / 9;
+      border: 0; border-radius: 10px; background: #000;
+    }
+    @media (min-width: 640px) { .gallery { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .gallery { grid-template-columns: repeat(3, 1fr); } }
+    .portfolio-caption {
+      position: absolute; inset: auto 0 0;
+      padding: 50px 22px 22px; background: linear-gradient(transparent, #000d);
+    }
+
+    .video-card {
+      position: relative; overflow: hidden; background: #191a1d; border-radius: 12px;
+      aspect-ratio: 16 / 9;
+    }
+    .video-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s; filter: brightness(.8); }
+    .video-card:hover img { transform: scale(1.06); }
+    .video-card .play-badge {
+      position: absolute; inset: 0; margin: auto;
+      display: flex; align-items: center; justify-content: center;
+      width: 62px; height: 62px; border-radius: 50%;
+      background: #c7a574; color: #101112;
+      box-shadow: 0 10px 30px #0008;
+      transition: transform .2s, background .2s;
+    }
+    .video-card:hover .play-badge { transform: scale(1.1); background: #dfbd8f; }
+    .video-label {
+      position: absolute; inset: auto 0 0;
+      padding: 44px 18px 18px; background: linear-gradient(transparent, #000d);
+    }
+
+    @media (max-width: 640px) {
+      .shell { width: calc(100% - 32px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto !important; }
+      *, *::before, *::after {
+        animation: none !important; transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-ink font-sans text-white antialiased">
+  <a href="#main" class="fixed left-4 top-4 z-[100] -translate-y-24 rounded bg-gold px-4 py-3 text-ink focus:translate-y-0">
+    Перейти до вмісту
+  </a>
+
+  <!-- 01. ШАПКА САЙТУ -->
+  <header class="sticky top-0 z-50 border-b border-white/[.08] bg-ink/95 backdrop-blur-xl">
+    <div class="shell flex h-20 items-center justify-between gap-3">
+      <a href="index.html" class="flex shrink-0 items-center gap-3" aria-label="VARBUS — на головну">
+        <span class="flex h-10 w-10 items-center justify-center rounded-lg border border-gold/40 text-gold">
+          <i data-lucide="scan-line" class="h-6 w-6" aria-hidden="true"></i>
+        </span>
+        <span>
+          <span class="block font-display text-lg font-semibold tracking-[-.07em]">VARBUS<span class="text-gold">/</span></span>
+          <span class="block text-[8px] font-bold tracking-[.17em] text-muted">ПРОМИСЛОВА ВИШИВКА</span>
+        </span>
+      </a>
+
+      <nav aria-label="Основна навігація" class="hidden items-center gap-6 text-xs text-muted xl:flex">
+        <a href="index.html#services" class="hover:text-gold">Послуги</a>
+        <a href="index.html#technology" class="hover:text-gold">Обладнання</a>
+        <a href="gallery.html" class="text-gold" aria-current="page">Наші роботи</a>
+        <a href="index.html#contacts" class="hover:text-gold">Контакти</a>
+      </nav>
+
+      <div class="flex items-center gap-2 sm:gap-4">
+        <a href="index.html#calculator" class="button button-gold hidden sm:inline-flex">
+          Розрахувати замовлення
+          <i data-lucide="arrow-up-right" class="h-4 w-4" aria-hidden="true"></i>
+        </a>
+        <button id="menuButton" type="button" class="social-icon xl:hidden"
+                aria-label="Відкрити меню" aria-expanded="false" aria-controls="mobileMenu">
+          <i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+
+    <nav id="mobileMenu" class="hidden border-t border-white/10 xl:hidden" aria-label="Мобільна навігація">
+      <div class="shell flex flex-col gap-1 py-4 text-sm">
+        <a href="index.html#services" class="rounded px-3 py-3 hover:bg-white/5">Послуги</a>
+        <a href="index.html#technology" class="rounded px-3 py-3 hover:bg-white/5">Обладнання</a>
+        <a href="gallery.html" class="rounded px-3 py-3 text-gold hover:bg-white/5">Наші роботи</a>
+        <a href="index.html#calculator" class="rounded px-3 py-3 hover:bg-white/5">Розрахувати замовлення</a>
+        <a href="index.html#contacts" class="rounded px-3 py-3 hover:bg-white/5">Контакти</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- 02. ЗАГОЛОВОК ГАЛЕРЕЇ -->
+    <section class="py-16 lg:py-24">
+      <div class="shell">
+        <span class="eyebrow">Наші роботи</span>
+        <h1 class="section-title mt-4 max-w-3xl">Результати, які говорять<br><span class="text-gold">самі за себе.</span></h1>
+        <p class="mt-5 max-w-lg text-sm leading-7 text-muted">
+          Машинна вишивка на одязі, текстільних матеріалах і мерчі.
+          Перегляньте фото та відео наших робіт — як виглядає результат у житті.
+        </p>
+      </div>
+    </section>
+
+    <!-- 03. ФОТО -->
+    <section id="photos" class="pb-16 lg:pb-20">
+      <div class="shell">
+        <div class="gallery-head">
+          <h2 class="text-xl font-bold">Фото робіт</h2>
+          <div class="filters" id="filters">
+            <button type="button" class="filter active" data-filter="all">Всі</button>
+            <button type="button" class="filter" data-filter="logo">Логотипи</button>
+            <button type="button" class="filter" data-filter="text">Написи</button>
+            <button type="button" class="filter" data-filter="clothes">Хрестик</button>
+            <button type="button" class="filter" data-filter="patch">Шеврони</button>
+          </div>
+        </div>
+
+        <!-- Картки будуються з масиву works у JavaScript нижче.
+             Додавання роботи: скопіюйте рядок у масив works, замініть
+             image на посилання з imgbb (https://i.ibb.co/.../photo.jpg),
+             category — logo / text / clothes / patch. -->
+        <div class="gallery" id="gallery" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- 04. ВІДЕО -->
+    <section id="videos" class="pb-16 lg:pb-20">
+      <div class="shell">
+        <div class="mb-8 flex items-end justify-between gap-4">
+          <h2 class="text-xl font-bold">Відео процесу</h2>
+          <span class="text-[10px] uppercase tracking-[.2em] text-muted">магія, яка заворожує</span>
+        </div>
+
+        <!-- Додавання відео: у масив videos у JavaScript нижче.
+             poster — обкладинка (картинка з media/videos/ або посилання),
+             video  — файл mp4 у media/videos/ (можна і зовнішнє посилання).
+             Якщо треба вбудувати YouTube — додайте type: 'youtube'. -->
+        <div class="grid gap-4 md:grid-cols-3" id="videoGrid"></div>
+      </div>
+    </section>
+
+    <!-- 05. ЗАПИТ ПРО РОБОТУ -->
+    <section class="pb-20 lg:pb-28">
+      <div class="shell rounded-2xl border border-gold/20 bg-gold/[.045] p-8 text-center lg:p-14">
+        <h2 class="section-title">Сподобалось?<br><span class="text-gold">Зробимо так само.</span></h2>
+        <p class="mx-auto mt-4 max-w-md text-sm leading-7 text-muted">
+          Надішліть макет або опишіть ідею - порахуємо вартість і назвемо терміни.
+        </p>
+        <a href="index.html#calculator" class="button button-gold mt-7">
+          Розрахувати замовлення
+          <i data-lucide="arrow-up-right" class="h-4 w-4" aria-hidden="true"></i>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- 06. ПІДВАЛ -->
+  <footer class="border-t border-white/[.08] bg-[#151618]">
+    <div class="shell grid gap-10 py-12 md:grid-cols-3">
+      <a href="index.html" class="flex items-center gap-3">
+        <span class="flex h-10 w-10 items-center justify-center rounded-lg border border-gold/40 text-gold">
+          <i data-lucide="scan-line" class="h-6 w-6" aria-hidden="true"></i>
+        </span>
+        <span>
+          <span class="block font-display text-lg font-semibold tracking-[-.07em]">VARBUS<span class="text-gold">/</span></span>
+          <span class="block text-[8px] font-bold tracking-[.17em] text-muted">ПРОМИСЛОВА ВИШИВКА</span>
+        </span>
+      </a>
+
+      <nav class="flex flex-col gap-2 text-sm text-muted" aria-label="Навігація в підвалі">
+        <a href="index.html#services" class="hover:text-gold">Послуги</a>
+        <a href="index.html#technology" class="hover:text-gold">Обладнання</a>
+        <a href="gallery.html" class="hover:text-gold">Наші роботи</a>
+        <a href="index.html#contacts" class="hover:text-gold">Контакти</a>
+      </nav>
+
+      <div class="text-sm text-muted">
+        <p class="text-xs font-semibold text-white">Контакти</p>
+        <p class="mt-2 text-xs leading-6">вулиця Гранітна, 1, Одеса</p>
+        <p class="text-xs leading-6">
+          <a id="studioPhoneFooter" href="index.html#contacts" class="hover:text-gold">+38(095)-528-98-73</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="border-t border-white/[.08]">
+      <div class="shell flex flex-col justify-between gap-4 py-6 text-[10px] text-muted sm:flex-row sm:items-center">
+        <p>© <span id="currentYear"></span> VARBUS. Усі права захищено.</p>
+        <a href="index.html" class="flex items-center gap-2 hover:text-gold">
+          На головну
+          <i data-lucide="arrow-up-right" class="h-3 w-3" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+<!-- Лайтбокс: перегляд фото у збільшеному вигляді -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Перегляд роботи">
+    <div class="lightbox-count" id="lbCount" aria-live="polite"></div>
+    <button type="button" class="lightbox-close" id="lbClose" aria-label="Закрити">×</button>
+    <button type="button" class="lightbox-nav lightbox-prev" id="lbPrev" aria-label="Попереднє фото">‹</button>
+    <img id="lbImage" src="" alt="">
+    <button type="button" class="lightbox-nav lightbox-next" id="lbNext" aria-label="Наступне фото">›</button>
+    <div class="lightbox-caption">
+      <h3 id="lbTitle"></h3>
+      <p id="lbDesc"></p>
+    </div>
+  </div>
+
+  <!-- Лайтбокс для відео -->
+  <div id="videoLightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Перегляд відео">
+    <button type="button" class="lightbox-close" id="lbVClose" aria-label="Закрити">×</button>
+    <video id="lbVideo" controls playsinline preload="metadata" hidden></video>
+    <iframe id="lbFrame" hidden allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+    <div class="lightbox-caption">
+      <h3 id="lbVTitle"></h3>
+      <a id="lbVLink" href="#" target="_blank" rel="noopener"
+         style="display:none; margin-top:10px; font-size:13px; color:#c7a574; text-decoration:underline;">
+        Відкрити на YouTube →
+      </a>
+    </div>
+  </div>
+
+  <script>
+    /*
+     * РОБОТИ ГАЛЕРЕЇ.
+     * Додавайте роботи сюди: скопіюйте рядок, замініть image на посилання
+     * з imgbb (https://i.ibb.co/.../photo.jpg), category — logo / text / clothes / patch.
+     * Категорії кнопок: Всі / Логотипи / Написи / Хрестик / Шеврони.
+     * Якщо в роботі кілька фото — додайте масив images (перше фото = обкладинка):
+     *   image:  'https://i.ibb.co/.../1.jpg',
+     *   images: [
+     *     'https://i.ibb.co/.../1.jpg',
+     *     'https://i.ibb.co/.../2.jpg'
+     *   ]
+     */
+    const works = [
+      {
+        category: 'logo',
+        image: 'https://i.ibb.co/Wp2QJ9ny/photo-2026-09-16-11-49-40-2.jpg',
+        images: [
+          'https://i.ibb.co/DDcWR5BF/photo-2026-09-16-11-49-41-cr.jpg',
+          'https://i.ibb.co/5x5jfhq2/photo-2026-09-16-11-49-41-2-cr.jpg',
+          'https://i.ibb.co/qMSFVmcR/photo-2026-09-16-11-50-29-2-cr-cr.jpg'
+        ],
+        title: 'Обплетення на кермо',
+        description: '49 750 стібків · 3 кольори'
+      },
+      {
+        category: 'logo',
+        image: 'https://i.ibb.co/Fk2BRpQf/IMG-0907.jpg',
+        title: 'Знак Ом (або Аум, ॐ)',
+        description: '265 х 265 · 64 200 стібків · 1 колір'
+      },
+      {
+        category: 'clothes',
+        image: 'https://i.ibb.co/gLhxCpsN/IMG-0918.jpg',
+        title: 'Орнамент',
+        description: '104 х 140 · 12 369 стібків · 2 кольори'
+      },
+      {
+        category: 'patch',
+        image: 'https://i.ibb.co/WNwBFgdJ/IMG-0921-cr.jpg',
+        title: '81 ОАеМБр',
+        description: '67 х 79 · 15 992 стібків · 6 кольорів'
+      },
+      {
+        category: 'text',
+        image: 'https://i.ibb.co/204kQx0x/IMG-0939-cr.jpg',
+        images: [
+          'https://i.ibb.co/pvHSWvJR/image.jpg',
+          'https://i.ibb.co/WvnCcGkB/IMG-0926-cr.jpg'
+        ],
+        title: '9 figures loading...',
+        description: '100 х 12 · 2 529 стібків · 1 колір'
+      },
+      {
+        category: 'clothes',
+        image: 'https://i.ibb.co/PGDWzgFM/IMG-0917-cr.jpg',
+        title: 'Орнамент_2'
+      },
+      {
+        category: 'text',
+        image: 'https://i.ibb.co/27rXgJMF/IMG-0936-cr.jpg',
+        images: [
+          'https://i.ibb.co/7NKnY9Tj/IMG-6942-1.jpg',
+          'https://i.ibb.co/Q7djwdL0/IMG-6932.jpg',
+          'https://i.ibb.co/V0PKTHxN/IMG-6939.jpg'
+        ],
+        title: 'Girl Club (white)',
+        description: '264 х 100 · 31 382 стібків · 1 колір'
+      },
+      {
+        category: 'logo',
+        image: 'https://i.ibb.co/PsyTDM1C/IMG-0938-cr.jpg',
+        images: [
+          'https://i.ibb.co/bgD1FLmm/101.jpg',
+          'https://i.ibb.co/60ykx0vy/IMG-6935.jpg',
+          'https://i.ibb.co/WWX5s4Yf/IMG-7035-1.jpg'
+        ],
+        title: 'Girl Club (black)',
+        description: '86 х 100 · 15 564 стібків · 2 кольори'
+      },
+      {
+        category: 'patch',
+        image: 'https://i.ibb.co/TDmRcMPW/IMG-0923-cr.jpg',
+        title: 'Alfa Romeo',
+        description: '91 х 91 · 20 975 стібків · 5 кольорів'
+      },
+      {
+        category: 'logo',
+        image: 'https://i.ibb.co/svvP0Mf8/IMG-0900.jpg',
+        images: [
+          'https://i.ibb.co/svvP0Mf8/IMG-0900.jpg',
+          'https://i.ibb.co/Cppb5Jg9/IMG-0903-cr.jpg'
+        ],
+        title: 'Radiology med',
+        description: '47 х 55 · 5 046 стібків · 3 кольори'
+      },
+      {
+        category: 'text',
+        image: 'https://i.ibb.co/9HQDxGLj/IMG-0914.jpg',
+        title: 'Агент УПА'
+      },
+      {
+        category: 'logo',
+        image: 'https://i.ibb.co/rRm8c1TY/IMG-0929-cr.jpg',
+        title: 'Myophysio',
+        description: '103 х 59 · 4 040 стібків · 1 колір'
+      },
+      {
+        category: 'patch',
+        image: 'https://i.ibb.co/xq0vJ0z3/IMG-0924.jpg',
+        title: 'BMW'
+      },
+      {
+        category: 'clothes',
+        image: 'https://i.ibb.co/GvRvnDNJ/IMG-0928.jpg',
+        title: 'Орнамент_3'
+      },
+      {
+        category: 'logo',
+        image: 'https://i.ibb.co/VY4syJdd/IMG-0935-cr.jpg',
+        images: [
+          'https://i.ibb.co/7J5dRS7t/photo-2026-05-01-10-41-42.jpg',
+          'https://i.ibb.co/JjDcm52y/photo-2026-05-01-10-42-09.jpg',
+          'https://i.ibb.co/DfBfF1Tc/IMG-6940.jpg'
+        ],
+        title: 'Геральдичний символ (white)',
+        description: '86 х 100 · 15 564 стібків · 2 кольори'
+      },
+      {
+        category: 'logo',
+        image: 'https://i.ibb.co/HfCMqY4K/IMG-0913-cr.jpg',
+        images: [
+          'https://i.ibb.co/h1ggGJVt/IMG-7656-cr.jpg',
+          'https://i.ibb.co/x8SfTV5p/IMG-0934.jpg'
+        ],
+        title: 'Black cat',
+        description: '170 х 150 · 23 295 стібків · 3 кольори'
+      },
+      {
+        category: 'text',
+        image: 'https://i.ibb.co/PGCKVr2Y/IMG-0909.jpg',
+        images: [
+          'https://i.ibb.co/PGCKVr2Y/IMG-0909.jpg',
+          'https://i.ibb.co/Q7pf05Kh/Chat-GPT-Image-18-2026-12-45-38.png'
+        ],
+        title: 'Eugenia',
+        description: '100 х 31 · 3 919 стібків · 2 кольори'
+      },
+      {
+        category: 'patch',
+        image: 'https://i.ibb.co/5g81j74K/IMG-0925.jpg',
+        title: 'UAF'
+      },
+      {
+        category: 'text',
+        image: 'https://i.ibb.co/cXXJ4knk/photo-2026-09-16-11-50-29.jpg',
+        title: 'Emilia',
+        description: '254 х 129 · 25 884 стібків · 2 кольори'
+      },
+      {
+        category: 'logo',
+        image: 'https://i.ibb.co/5gCSZ3Md/IMG-0912-cr.jpg',
+        title: 'Odesa'
+      },
+      {
+        category: 'logo',
+        image: 'https://i.ibb.co/D6W1xd7/IMG-0167.jpg',
+        title: 'Bad Boy',
+        description: '250 х 106 · 13 795 стібків · 1 колір'
+      },
+      {
+        category: 'patch',
+        image: 'https://i.ibb.co/gb94hdHW/IMG-0919-cr.jpg',
+        title: 'Lexus cup'
+      },
+      {
+        category: 'logo',
+        image: 'https://i.ibb.co/Hf13c1kn/IMG-0916-cr.jpg',
+        title: 'Skull spiders'
+      },
+      {
+        category: 'text',
+        image: 'https://i.ibb.co/mCLCFCf7/IMG-0931-cr.jpg',
+        title: 'Meridian',
+        description: '79 х 24 · 2 165 стібків · 1 колір'
+      },
+      {
+        category: 'logo',
+        image: 'https://i.ibb.co/sJtMV19S/IMG-0908-cr.jpg',
+        images: [
+          'https://i.ibb.co/sJtMV19S/IMG-0908-cr.jpg',
+          'https://i.ibb.co/Q7pf05Kh/Chat-GPT-Image-18-2026-12-45-38.png'
+        ],
+        title: 'Radiology (blue)',
+        description: '47 х 55 · 5 046 стібків · 3 кольори'
+      },
+      {
+        category: 'text',
+        image: 'https://i.ibb.co/G32ZdXrT/photo-2026-09-16-11-52-15-cr.jpg',
+        images: [
+          'https://i.ibb.co/G32ZdXrT/photo-2026-09-16-11-52-15-cr.jpg',
+          'https://i.ibb.co/zhc1pND4/IMG-7229-cr.jpg'
+        ],
+        title: 'Adma',
+        description: '62 х 13 · 1 518 стібків · 1 колір'
+      },
+      {
+        category: 'text',
+        image: 'https://i.ibb.co/sdWr4qfH/photo-2026-05-01-10-43-48.jpg',
+        images: [
+          'https://i.ibb.co/4ZGpzZJT/photo-2026-05-01-10-38-58.jpg',
+          'https://i.ibb.co/NdvMh388/photo-2026-05-01-10-38-45.jpg',
+          'https://i.ibb.co/4Zmj6vtr/IMG-6949.jpg'
+        ],
+        title: 'Offline',
+        description: '120 х 25 · 1 828 стібків · 1 колір'
+      },
+    ];
+
+    const CATEGORY_LABELS = {
+      all: 'Всі',
+      logo: 'Логотипи',
+      text: 'Написи',
+      clothes: 'Хрестик',
+      patch: 'Шеврони'
+    };
+
+/*
+     * ВІДЕО — mp4-файли лежать у папці media/videos/ поруч із сайтом
+     * (при розміщенні на GitHub/Netlify завантажте папку разом із сайтом).
+     *
+     * Поля елемента:
+     *   poster — обкладинка (картинка в media/videos/ або посилання, напр.
+     *            https://img.youtube.com/vi/ВАШ_ВІДЕО_ID/mqdefault.jpg );
+     *   video  — файл mp4: media/videos/назва.mp4
+     *            (можна і зовнішнє посилання — catbox/хостинг);
+     *   title  — назва (підпис).
+     *
+     * Щоб додати відео: покладіть mp4 у media/videos/ і скопіюйте блок нижче.
+     * (Якщо колись треба буде вбудувати YouTube — додайте type: 'youtube'
+     *  і в video вкажіть посилання на ролик.)
+     */
+    const videos = [
+      {
+        poster: 'https://i.ibb.co/MkQXZjVF/image.jpg',
+        video: 'media/videos/emilia.mp4',
+        title: 'Емілія'
+      },
+      {
+        poster: 'https://i.ibb.co/D6W1xd7/IMG-0167.jpg',
+        video: 'media/videos/bad_boy.mp4',
+        title: 'Bad Boy'
+      },
+      {
+        poster: 'https://i.ibb.co/XZ6HyYty/IMG-7355-cr.jpg',
+        video: 'media/videos/zal.mp4',
+        title: 'Зал спортивний клуб'
+      },
+      {
+        poster: 'https://i.ibb.co/39FF7n7m/IMG-6788.jpg',
+        video: 'media/videos/butterfly.mp4',
+        title: 'Butterfly'
+      },
+      {
+        poster: 'https://i.ibb.co/Kg7HBTC/ukr.jpg',
+        video: 'media/videos/ukr.mp4',
+        title: 'Герб України'
+      },
+      {
+        poster: 'https://i.ibb.co/YB2gtPcf/IMG-0926-cr.jpg',
+        video: 'media/videos/dollar.mp4',
+        title: 'Символ доллара'
+      },
+
+      // Тут додаються нові відео — скопіюйте цей блок, покладіть mp4 у media/videos/:
+      // {
+      //   poster: 'media/videos/назва.jpg',
+      //   video: 'media/videos/назва.mp4',
+      //   title: 'Назва відео'
+      // },
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) window.lucide.createIcons();
+      document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+      const menuButton = document.getElementById('menuButton');
+      const mobileMenu = document.getElementById('mobileMenu');
+      menuButton.addEventListener('click', () => {
+        const open = mobileMenu.classList.toggle('hidden');
+        menuButton.setAttribute('aria-expanded', String(!open));
+        const icon = menuButton.querySelector('i');
+        if (open) {
+          icon.setAttribute('data-lucide', 'menu');
+        } else {
+          icon.setAttribute('data-lucide', 'x');
+        }
+        if (window.lucide) window.lucide.createIcons();
+      });
+
+      /* ---------- ГАЛЕРЕЯ ЗАМОВЧУВАНЬ ---------- */
+      const gallery = document.getElementById('gallery');
+      const filterButtons = document.querySelectorAll('.filter');
+      let activeFilter = 'all';
+
+      const CATEGORY_COUNT = works.reduce((acc, work) => {
+        acc[work.category] = (acc[work.category] || 0) + 1;
+        return acc;
+      }, {});
+      filterButtons.forEach((button) => {
+        const key = button.dataset.filter;
+        const count = key === 'all' ? works.length : (CATEGORY_COUNT[key] || 0);
+        button.textContent = `${CATEGORY_LABELS[key]} · ${count}`;
+      });
+
+      function createMessage(message) {
+        const paragraph = document.createElement('p');
+        paragraph.className = 'gallery-message';
+        paragraph.textContent = message;
+        return paragraph;
+      }
+
+      function getWorkImages(work) {
+        return (work.images && work.images.length) ? work.images : [work.image];
+      }
+
+      function createWorkCard(work) {
+        const figure = document.createElement('figure');
+        figure.className = 'portfolio-card';
+        figure.tabIndex = 0;
+        figure.setAttribute('role', 'button');
+        figure.setAttribute('aria-label', `Відкрити роботу: ${work.title || 'без назви'}`);
+
+        const image = document.createElement('img');
+        image.src = work.image;
+        image.alt = work.title || 'Робота з машинної вишивки';
+        image.loading = 'lazy';
+        image.addEventListener('error', () => {
+          image.remove();
+          figure.append(createMessage('Зображення недоступне'));
+        }, { once: true });
+
+        const images = getWorkImages(work);
+        if (images.length > 1) {
+          const badge = document.createElement('span');
+          badge.className = 'photos-badge';
+          badge.textContent = `${images.length} фото`;
+          figure.append(badge);
+        }
+
+        const caption = document.createElement('figcaption');
+        caption.className = 'portfolio-caption';
+
+        const label = document.createElement('span');
+        label.className = 'text-[9px] uppercase tracking-[.2em] text-gold';
+        label.textContent = CATEGORY_LABELS[work.category] || 'Робота';
+
+        const title = document.createElement('h3');
+        title.className = 'mt-2 text-sm font-bold';
+        title.textContent = work.title || 'Без назви';
+
+        caption.append(label, title);
+
+        if (work.description) {
+          const description = document.createElement('p');
+          description.className = 'mt-2 text-xs text-gray-300';
+          description.textContent = work.description;
+          caption.append(description);
+        }
+
+        figure.append(image, caption);
+
+        figure.addEventListener('click', () => openLightbox(work, 0));
+        figure.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            openLightbox(work, 0);
+          }
+        });
+
+        return figure;
+      }
+
+      function renderWorks() {
+        const filteredWorks = activeFilter === 'all'
+          ? works
+          : works.filter(work => work.category === activeFilter);
+
+        gallery.replaceChildren();
+
+        if (!filteredWorks.length) {
+          gallery.append(createMessage(
+            activeFilter === 'all'
+              ? 'Робіт поки немає.'
+              : 'У цій категорії поки немає робіт.'
+          ));
+          return;
+        }
+
+        filteredWorks.forEach(work => {
+          gallery.append(createWorkCard(work));
+        });
+      }
+
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          filterButtons.forEach(item => item.classList.remove('active'));
+          button.classList.add('active');
+          activeFilter = button.dataset.filter;
+          renderWorks();
+        });
+      });
+
+      /* ---------- ЛАЙТБОКС ---------- */
+      const lightbox = document.getElementById('lightbox');
+      const lbImage = document.getElementById('lbImage');
+      const lbTitle = document.getElementById('lbTitle');
+      const lbDesc = document.getElementById('lbDesc');
+      const lbCount = document.getElementById('lbCount');
+      const lbClose = document.getElementById('lbClose');
+      const lbPrev = document.getElementById('lbPrev');
+      const lbNext = document.getElementById('lbNext');
+
+      let lightboxImages = [];
+      let lightboxIndex = 0;
+
+      function showLightboxImage() {
+        lbImage.src = lightboxImages[lightboxIndex];
+        lbCount.textContent = `${lightboxIndex + 1} / ${lightboxImages.length}`;
+        lbNext.hidden = lightboxImages.length < 2;
+        lbPrev.hidden = lightboxImages.length < 2;
+      }
+
+      function openLightbox(work, index) {
+        lightboxImages = getWorkImages(work);
+        lightboxIndex = index;
+        lbTitle.textContent = work.title || 'Без назви';
+        lbDesc.textContent = work.description || '';
+        showLightboxImage();
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        lbClose.focus();
+      }
+
+      function closeLightbox() {
+        lbImage.src = '';
+        lightbox.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      function stepLightbox(delta) {
+        lightboxIndex += delta;
+        if (lightboxIndex < 0) lightboxIndex = lightboxImages.length - 1;
+        if (lightboxIndex > lightboxImages.length - 1) lightboxIndex = 0;
+        showLightboxImage();
+      }
+
+      lbClose.addEventListener('click', closeLightbox);
+      lbPrev.addEventListener('click', () => stepLightbox(-1));
+      lbNext.addEventListener('click', () => stepLightbox(1));
+      lightbox.addEventListener('click', (event) => {
+        if (event.target === lightbox) closeLightbox();
+      });
+      document.addEventListener('keydown', (event) => {
+        if (!lightbox.classList.contains('open')) return;
+        if (event.key === 'Escape') closeLightbox();
+        if (event.key === 'ArrowLeft') stepLightbox(-1);
+        if (event.key === 'ArrowRight') stepLightbox(1);
+      });
+
+      /* ---------- ВІДЕО ---------- */
+      const videoGrid = document.getElementById('videoGrid');
+      const videoLightbox = document.getElementById('videoLightbox');
+      const lbVideo = document.getElementById('lbVideo');
+      const lbFrame = document.getElementById('lbFrame');
+      const lbVTitle = document.getElementById('lbVTitle');
+      const lbVLink = document.getElementById('lbVLink');
+      const lbVClose = document.getElementById('lbVClose');
+
+      function createVideoCard(video, index) {
+        const figure = document.createElement('figure');
+        figure.className = 'video-card';
+        figure.tabIndex = 0;
+        figure.setAttribute('role', 'button');
+        figure.setAttribute('aria-label', `Відкрити відео: ${video.title || 'без назви'}`);
+
+        const image = document.createElement('img');
+        image.src = video.poster;
+        image.alt = `Обкладинка відео: ${video.title || 'без назви'}`;
+        image.loading = 'lazy';
+
+        const badge = document.createElement('span');
+        badge.className = 'play-badge';
+        const icon = document.createElement('i');
+        icon.className = 'h-6 w-6';
+        icon.setAttribute('data-lucide', 'play');
+        icon.setAttribute('aria-hidden', 'true');
+        badge.append(icon);
+
+        const caption = document.createElement('figcaption');
+        caption.className = 'video-label';
+        const label = document.createElement('span');
+        label.className = 'text-[9px] uppercase tracking-[.2em] text-gold';
+        label.textContent = `Відео / ${String(index + 1).padStart(3, '0')}`;
+        const title = document.createElement('h3');
+        title.className = 'mt-2 text-sm font-bold';
+        title.textContent = video.title || 'Без назви';
+        caption.append(label, title);
+
+        figure.append(image, badge, caption);
+
+        figure.addEventListener('click', () => openVideoLightbox(video));
+        figure.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            openVideoLightbox(video);
+          }
+        });
+
+        return figure;
+      }
+
+      /* Перетворює будь-яке посилання YouTube на embed-адресу:
+       youtu.be/ID, watch?v=ID, shorts/ID, live/ID, embed/ID — всі підтримуються.
+       Використовуємо youtube-nocookie.com — іноді його не блокують мережеві фільтри,
+       на відміну від youtube.com/embed. */
+      function toYoutubeEmbed(url) {
+        if (!url) return '';
+        const m = String(url).match(/(?:youtu\.be\/|watch\?v=|shorts\/|live\/|embed\/)([A-Za-z0-9_-]{11})/);
+        return m ? 'https://www.youtube-nocookie.com/embed/' + m[1] : url;
+      }
+
+      /* Звичайне посилання на перегляд (для кнопки «Відкрити на YouTube»). */
+      function toYoutubeWatch(url) {
+        const m = String(url).match(/(?:youtu\.be\/|watch\?v=|shorts\/|live\/|embed\/)([A-Za-z0-9_-]{11})/);
+        return m ? 'https://www.youtube.com/watch?v=' + m[1] : url;
+      }
+
+      function openVideoLightbox(video) {
+        if (video.type === 'youtube') {
+          lbVideo.pause();
+          lbVideo.hidden = true;
+          lbFrame.hidden = false;
+          lbFrame.src = toYoutubeEmbed(video.video);
+          lbVLink.href = toYoutubeWatch(video.video);
+          lbVLink.style.display = '';
+        } else {
+          lbFrame.removeAttribute('src');
+          lbFrame.hidden = true;
+          lbVideo.hidden = false;
+          lbVideo.src = video.video;
+          lbVLink.style.display = 'none';
+        }
+        lbVTitle.textContent = video.title || '';
+        videoLightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        if (video.type !== 'youtube') lbVideo.play().catch(() => {});
+      }
+
+      function closeVideoLightbox() {
+        lbVideo.pause();
+        lbVideo.removeAttribute('src');
+        lbVideo.load();
+        lbFrame.removeAttribute('src');
+        lbVLink.style.display = 'none';
+        videoLightbox.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      lbVClose.addEventListener('click', closeVideoLightbox);
+      videoLightbox.addEventListener('click', (event) => {
+        if (event.target === videoLightbox) closeVideoLightbox();
+      });
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && videoLightbox.classList.contains('open')) {
+          closeVideoLightbox();
+        }
+      });
+
+      function renderVideos() {
+        videoGrid.replaceChildren();
+        videos.forEach((video, index) => {
+          videoGrid.append(createVideoCard(video, index));
+        });
+        if (window.lucide) window.lucide.createIcons();
+      }
+
+      renderVideos();
+      renderWorks();
+    });
+  </script>
+</body>
+</html>

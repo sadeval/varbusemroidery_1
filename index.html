@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+<html lang="uk" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101112">
+  <link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=4">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=4">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=4">
+  <meta name="description" content="Промислова машинна вишивка на професійному обладнанні. Брендування одягу, шеврони, корпоративний текстиль. Розрахуйте вартість онлайн.">
+  <title>VARBUS - промислова машинна вишивка</title>
+
+  <!-- Tailwind CSS. Для робочого сайту рекомендовано зібрати стилі локально. -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#101112',
+            panel: '#191a1d',
+            gold: '#c7a574',
+            muted: '#a5a5ad'
+          },
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif'],
+            display: ['Unbounded', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+
+  <style>
+    :root { color-scheme: dark; }
+    * { -webkit-tap-highlight-color: transparent; }
+    body { overflow-x: hidden; }
+    ::selection { background: #c7a574; color: #101112; }
+    section[id], footer[id], form[id] { scroll-margin-top: 100px; }
+
+    .shell { width: min(1280px, calc(100% - 48px)); margin-inline: auto; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 10px; font-weight: 800; color: #c7a574;
+      letter-spacing: .18em; text-transform: uppercase;
+    }
+    .eyebrow::before { content: ''; width: 25px; height: 1px; background: currentColor; }
+    .section-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(25px, 3.4vw, 43px);
+      line-height: 1.35; letter-spacing: -.045em;
+    }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 48px; gap: 10px; padding: 13px 21px;
+      border-radius: 8px; font-size: 12px; font-weight: 800;
+      transition: transform .2s, background .2s, border-color .2s;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button-gold { color: #101112; background: #c7a574; }
+    .button-gold:hover { background: #dfbd8f; }
+    .button-outline { border: 1px solid #ffffff22; background: #ffffff03; }
+    .button-outline:hover { border-color: #c7a57488; background: #c7a5740b; }
+    .button:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+    .social-icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; border: 1px solid #ffffff18;
+      border-radius: 8px; color: #c7a574;
+      transition: background .2s, border-color .2s;
+    }
+    .social-icon:hover { background: #c7a57412; border-color: #c7a57477; }
+    :focus-visible { outline: 2px solid #dfbd8f; outline-offset: 4px; }
+
+    .hero-overlay {
+      background:
+        linear-gradient(90deg, #101112 1%, #101112ed 30%, #10111280 68%, #10111240),
+        linear-gradient(0deg, #101112, transparent 60%);
+    }
+    .hero-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(33px, 5.1vw, 68px);
+      line-height: 1.17; letter-spacing: -.06em;
+      overflow-wrap: break-word;
+    }
+    .service-card {
+      position: relative; overflow: hidden; min-height: 330px;
+      background: #191a1d; border: 1px solid #ffffff14; border-radius: 12px;
+      transition: transform .3s, border-color .3s;
+    }
+    .service-card:hover { transform: translateY(-6px); border-color: #c7a57488; }
+    .service-card img { transition: transform .7s, opacity .5s; }
+    .service-card:hover img { transform: scale(1.07); opacity: .65; }
+    .field {
+      display: block; width: 100%; min-height: 50px;
+      padding: 12px 14px; background: #111214; color: #f5f5f5;
+      border: 1px solid #ffffff1c; border-radius: 8px;
+      font: inherit; font-size: 13px; transition: border-color .2s, opacity .2s;
+    }
+    .field:focus {
+      outline: none; border-color: #c7a574;
+      box-shadow: 0 0 0 3px #c7a57414;
+    }
+    .field:disabled { color: #909099; background-color: #202124; cursor: not-allowed; opacity: .7; }
+    .field::placeholder { color: #85858e; }
+    .field-label { display: block; margin-bottom: 9px; font-size: 12px; color: #ccc; }
+    select.field {
+      appearance: none; padding-right: 38px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23c7a574' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 14px center;
+    }
+    input[type="range"].fill-range {
+      width: 100%; height: 6px; appearance: none; -webkit-appearance: none;
+      background: linear-gradient(90deg, #c7a574 0%, #8d774f 100%);
+      border-radius: 999px; outline: none; cursor: pointer;
+    }
+    input[type="range"].fill-range::-webkit-slider-thumb {
+      appearance: none; -webkit-appearance: none; width: 18px; height: 18px;
+      background: #f5f5f5; border: 3px solid #c7a574; border-radius: 50%;
+      box-shadow: 0 2px 6px #00000066;
+    }
+    input[type="range"].fill-range::-moz-range-thumb {
+      width: 18px; height: 18px; background: #f5f5f5; border: 3px solid #c7a574;
+      border-radius: 50%; box-shadow: 0 2px 6px #00000066;
+    }
+    .upload-zone {
+      background: radial-gradient(ellipse at top, #c7a5740e, transparent 75%), #121315;
+      border: 1px dashed #c7a57466;
+      transition: background .2s, border-color .2s;
+    }
+    .upload-zone:hover, .upload-zone.is-dragging { background-color: #201c17; border-color: #c7a574; }
+    .loader-ring {
+      height: 48px; width: 48px; border: 2px solid #c7a57425;
+      border-top-color: #c7a574; border-radius: 50%; animation: spin .8s linear infinite;
+    }
+    .portfolio-card { position: relative; overflow: hidden; background: #191a1d; border-radius: 12px; }
+    .portfolio-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s; }
+    .portfolio-card:hover img { transform: scale(1.08); }
+    .portfolio-caption {
+      position: absolute; inset: auto 0 0;
+      padding: 50px 22px 22px; background: linear-gradient(transparent, #000d);
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 640px) {
+      .shell { width: calc(100% - 32px); }
+      .hero-overlay {
+        background: linear-gradient(90deg, #101112ed, #10111299),
+                    linear-gradient(0deg, #101112, transparent);
+      }
+      .service-card { min-height: 300px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto !important; }
+      *, *::before, *::after {
+        animation: none !important; transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-ink font-sans text-white antialiased">
+  <a href="#main" class="fixed left-4 top-4 z-[100] -translate-y-24 rounded bg-gold px-4 py-3 text-ink focus:translate-y-0">
+    Перейти до вмісту
+  </a>
+
+  <!-- 01. ШАПКА САЙТУ -->
+  <header class="sticky top-0 z-50 border-b border-white/[.08] bg-ink/95 backdrop-blur-xl">
+    <div class="shell flex h-20 items-center justify-between gap-3">
+      <a href="#" class="flex shrink-0 items-center gap-3" aria-label="VARBUS - на головну">
+        <span class="flex h-10 w-10 items-center justify-center rounded-lg border border-gold/40 text-gold">
+          <i data-lucide="scan-line" class="h-6 w-6" aria-hidden="true"></i>
+        </span>
+        <span>
+          <span class="block font-display text-lg font-semibold tracking-[-.07em]">VARBUS<span class="text-gold">/</span></span>
+          <span class="block text-[8px] font-bold tracking-[.17em] text-muted">ПРОМИСЛОВА ВИШИВКА</span>
+        </span>
+      </a>
+
+      <nav aria-label="Основна навігація" class="hidden items-center gap-6 text-xs text-muted xl:flex">
+        <a href="#services" class="hover:text-gold">Послуги</a>
+        <a href="#technology" class="hover:text-gold">Обладнання</a>
+        <a href="gallery.html" class="hover:text-gold">Наші роботи</a>
+        <a href="#contacts" class="hover:text-gold">Контакти</a>
+      </nav>
+
+      <div class="flex items-center gap-2 sm:gap-4">
+        <!-- Усі адреси соціальних мереж задаються в об’єкті CONTACTS. -->
+        <div class="hidden items-center gap-2 md:flex">
+          <a data-social="telegram" href="#contacts" class="social-icon" aria-label="Написати в Telegram" title="Telegram">
+            <i data-lucide="send" class="h-4 w-4" aria-hidden="true"></i>
+          </a>
+          <a data-social="whatsapp" href="#contacts" class="social-icon" aria-label="Написати у WhatsApp" title="WhatsApp">
+            <i data-lucide="message-circle" class="h-4 w-4" aria-hidden="true"></i>
+          </a>
+        </div>
+        <a data-social="instagram" href="#contacts" class="social-icon" aria-label="Переглянути Instagram студії" title="Instagram">
+          <i data-lucide="instagram" class="h-4 w-4" aria-hidden="true"></i>
+        </a>
+        <a href="#calculator" class="button button-gold hidden sm:inline-flex">
+          Розрахувати замовлення
+          <i data-lucide="arrow-up-right" class="h-4 w-4" aria-hidden="true"></i>
+        </a>
+        <button id="menuButton" type="button" class="social-icon xl:hidden"
+                aria-label="Відкрити меню" aria-expanded="false" aria-controls="mobileMenu">
+          <i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+
+    <nav id="mobileMenu" class="hidden border-t border-white/10 xl:hidden" aria-label="Мобільна навігація">
+      <div class="shell flex flex-col gap-1 py-4 text-sm">
+        <a href="#services" class="rounded px-3 py-3 hover:bg-white/5">Послуги</a>
+        <a href="#technology" class="rounded px-3 py-3 hover:bg-white/5">Обладнання</a>
+        <a href="gallery.html" class="rounded px-3 py-3 hover:bg-white/5">Наші роботи</a>
+        <a href="#calculator" class="rounded px-3 py-3 text-gold hover:bg-white/5">Розрахувати замовлення</a>
+        <a href="#contacts" class="rounded px-3 py-3 hover:bg-white/5">Контакти</a>
+        <div class="mt-3 flex flex-wrap gap-2">
+          <a data-social="telegram" href="#contacts" class="button button-outline">
+            <i data-lucide="send" class="h-4 w-4 text-gold" aria-hidden="true"></i> Telegram
+          </a>
+          <a data-social="whatsapp" href="#contacts" class="button button-outline">
+            <i data-lucide="message-circle" class="h-4 w-4 text-gold" aria-hidden="true"></i> WhatsApp
+          </a>
+          <a data-social="instagram" href="#contacts" class="button button-outline">
+            <i data-lucide="instagram" class="h-4 w-4 text-gold" aria-hidden="true"></i> Instagram
+          </a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- 02. ПЕРШИЙ ЕКРАН -->
+    <section class="relative isolate overflow-hidden">
+      <div class="absolute inset-0 -z-10">
+        <!-- ИНСТРУКЦИЯ: Замените эту ссылку на ваше реальное фото вышивки/цеха -->
+        <img
+          src="https://i.ibb.co/9HMY4tdF/IMG-7675-cr.jpg"
+          alt=""
+          fetchpriority="high"
+          class="h-full w-full object-cover opacity-75"
+        >
+        <div class="hero-overlay absolute inset-0"></div>
+      </div>
+
+      <div class="shell pb-16 pt-16 sm:pb-20 sm:pt-24 lg:pb-24 lg:pt-28">
+        <div class="mb-8 inline-flex items-center gap-3 rounded-full border border-gold/25 bg-gold/5 px-4 py-2.5">
+          <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-gold shadow-[0_0_0_5px_#c7a57412]"></span>
+          <span class="text-[9px] font-bold uppercase tracking-[.15em] text-gold sm:text-[10px]">
+            Точність машини. Характер вашого бренду.
+          </span>
+        </div>
+
+        <h1 class="hero-title max-w-[1000px] font-medium">
+          Промислова<br class="hidden sm:block">
+          машинна вишивка:<br>
+          <span class="text-gold">від 3 шт.</span> до<br class="sm:hidden"> гуртових тиражів
+        </h1>
+
+        <p class="mt-7 max-w-xl text-sm leading-7 text-gray-300 sm:text-base">
+          Перетворюємо ваш логотип на відчутну якість.
+          Професійні 12-ниткові машини, точне відтворення деталей
+          та акуратний стібок - на кожному виробі.
+        </p>
+
+        <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+          <a href="#calculator" class="button button-gold">
+            Розрахувати вартість
+            <i data-lucide="arrow-up-right" class="h-4 w-4" aria-hidden="true"></i>
+          </a>
+          <a href="#portfolio" class="button button-outline">
+            Переглянути роботи
+            <i data-lucide="move-down-right" class="h-4 w-4" aria-hidden="true"></i>
+          </a>
+        </div>
+
+        <div class="mt-10 flex flex-wrap gap-x-7 gap-y-3 text-[11px] text-muted">
+          <span class="flex items-center gap-2"><i data-lucide="check" class="h-4 w-4 text-gold" aria-hidden="true"></i> Від трьох виробів</span>
+          <span class="flex items-center gap-2"><i data-lucide="check" class="h-4 w-4 text-gold" aria-hidden="true"></i> На вашому матеріалі</span>
+          <span class="flex items-center gap-2"><i data-lucide="check" class="h-4 w-4 text-gold" aria-hidden="true"></i> Доставка по Україні</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03. ХАРАКТЕРИСТИКИ ОБЛАДНАННЯ -->
+    <section id="technology" class="border-y border-white/[.08] bg-[#151618]" aria-label="Характеристики обладнання">
+      <div class="shell grid grid-cols-2 md:grid-cols-4">
+        <div class="flex flex-col justify-center border-b border-r border-white/[.08] py-7 pr-4 md:border-b-0 md:py-9">
+          <span class="eyebrow !text-[9px]">Наше обладнання</span>
+          <p class="mt-3 text-sm font-semibold leading-6">Для складних завдань<br>і великих тиражів</p>
+        </div>
+        <div class="border-b border-white/[.08] px-5 py-7 md:border-b-0 md:border-r md:px-8 md:py-9">
+          <p class="font-display text-3xl text-gold sm:text-4xl">03</p>
+          <h2 class="mt-3 text-xs font-semibold">Вишивальні голови</h2>
+          <p class="mt-1 text-xs leading-5 text-muted">Три вироби одночасно</p>
+        </div>
+        <div class="border-r border-white/[.08] py-7 pr-4 md:px-8 md:py-9">
+          <p class="font-display text-3xl text-gold sm:text-4xl">12</p>
+          <h2 class="mt-3 text-xs font-semibold">Кольорів ниток</h2>
+          <p class="mt-1 text-xs leading-5 text-muted">Багатоколірні дизайни</p>
+        </div>
+        <div class="px-5 py-7 md:px-8 md:py-9">
+          <p class="font-display text-3xl text-gold sm:text-4xl">1 200</p>
+          <h2 class="mt-3 text-xs font-semibold">Обертів за хвилину</h2>
+          <p class="mt-1 text-xs leading-5 text-muted">Номінальна швидкість</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04. ПОСЛУГИ -->
+    <section id="services" class="py-20 lg:py-28">
+      <div class="shell">
+        <div class="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+          <div>
+            <span class="eyebrow">01 / Напрями</span>
+            <h2 class="section-title mt-4">Ваш бренд.<br><span class="text-muted">На будь-якій фактурі.</span></h2>
+          </div>
+          <p class="max-w-sm text-sm leading-7 text-muted">
+            Від лаконічного логотипа до складного багатоколірного шеврона.
+            Доберемо технологію під ваш матеріал і завдання.
+          </p>
+        </div>
+
+        <!-- Тимчасові світлини послуг можна замінити власними. -->
+        <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          <a href="#calculator" class="service-card group">
+            <img src="https://i.ibb.co/G4q2wTKW/c7b8075e-e3e0-4fc9-9144-dd3bcd751746.png"
+                 alt="Футболка для брендування" loading="lazy"
+                 class="absolute inset-0 h-full w-full object-cover opacity-40">
+            <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-transparent"></div>
+            <span class="absolute left-5 top-5 font-display text-xs text-white/50">01</span>
+            <span class="absolute right-5 top-5 rounded-full border border-white/20 p-2 transition group-hover:bg-gold group-hover:text-ink">
+              <i data-lucide="arrow-up-right" class="h-4 w-4" aria-hidden="true"></i>
+            </span>
+            <div class="absolute inset-x-0 bottom-0 p-5">
+              <h3 class="text-lg font-bold">Брендування<br>одягу</h3>
+              <p class="mt-3 text-xs leading-6 text-gray-400">Логотипи, які працюють на впізнаваність вашого бізнесу.</p>
+            </div>
+          </a>
+
+          <a href="#calculator" class="service-card group">
+            <img src="https://i.ibb.co/2YgXQWtz/image.jpg"
+                 alt="Матеріали текстильної майстерні" loading="lazy"
+                 class="absolute inset-0 h-full w-full object-cover opacity-40">
+            <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-transparent"></div>
+            <span class="absolute left-5 top-5 font-display text-xs text-white/50">02</span>
+            <span class="absolute right-5 top-5 rounded-full border border-white/20 p-2 transition group-hover:bg-gold group-hover:text-ink">
+              <i data-lucide="arrow-up-right" class="h-4 w-4" aria-hidden="true"></i>
+            </span>
+            <div class="absolute inset-x-0 bottom-0 p-5">
+              <h3 class="text-lg font-bold">Шеврони<br>та нашивки</h3>
+              <p class="mt-3 text-xs leading-6 text-gray-400">Чіткий контур, щільне заповнення та виразні деталі.</p>
+            </div>
+          </a>
+
+          <a href="#calculator" class="service-card group">
+            <img src="https://i.ibb.co/27BBg52D/IMG-6935.jpg"
+                 alt="Худі для персональної вишивки" loading="lazy"
+                 class="absolute inset-0 h-full w-full object-cover opacity-40">
+            <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-transparent"></div>
+            <span class="absolute left-5 top-5 font-display text-xs text-white/50">03</span>
+            <span class="absolute right-5 top-5 rounded-full border border-white/20 p-2 transition group-hover:bg-gold group-hover:text-ink">
+              <i data-lucide="arrow-up-right" class="h-4 w-4" aria-hidden="true"></i>
+            </span>
+            <div class="absolute inset-x-0 bottom-0 p-5">
+              <h3 class="text-lg font-bold">Вишивка на худі<br>та футболках</h3>
+              <p class="mt-3 text-xs leading-6 text-gray-400">Авторські колекції, персональні речі та мерч зі змістом.</p>
+            </div>
+          </a>
+
+          <a href="#contacts" class="service-card group">
+            <img src="https://i.ibb.co/8ng0HFBy/Chat-GPT-Image-18-2026-12-45-38.png"
+                 alt="Текстиль для корпоративного оформлення" loading="lazy"
+                 class="absolute inset-0 h-full w-full object-cover opacity-40">
+            <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-transparent"></div>
+            <span class="absolute left-5 top-5 font-display text-xs text-white/50">04</span>
+            <span class="absolute right-5 top-5 rounded-full border border-white/20 p-2 transition group-hover:bg-gold group-hover:text-ink">
+              <i data-lucide="arrow-up-right" class="h-4 w-4" aria-hidden="true"></i>
+            </span>
+            <div class="absolute inset-x-0 bottom-0 p-5">
+              <h3 class="text-lg font-bold">Корпоративний<br>текстиль</h3>
+              <p class="mt-3 text-xs leading-6 text-gray-400">Рушники, фартухи та уніформа в єдиному стилі вашої команди.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05. ПЕРЕВАГИ -->
+    <section class="pb-20 lg:pb-28" aria-labelledby="advantagesTitle">
+      <div class="shell">
+        <h2 id="advantagesTitle" class="sr-only">Переваги нашої студії</h2>
+        <div class="grid gap-8 border-t border-white/10 pt-10 sm:grid-cols-2 lg:grid-cols-4">
+          <article>
+            <i data-lucide="zap" class="mb-5 h-6 w-6 text-gold" aria-hidden="true"></i>
+            <h3 class="text-sm font-bold">Висока швидкість</h3>
+            <p class="mt-3 text-xs leading-6 text-muted">Три голови працюють одночасно. Тираж зростає - якість залишається незмінною.</p>
+          </article>
+          <article>
+            <i data-lucide="shield-check" class="mb-5 h-6 w-6 text-gold" aria-hidden="true"></i>
+            <h3 class="text-sm font-bold">Стійкість до прання</h3>
+            <p class="mt-3 text-xs leading-6 text-muted">Професійні нитки зберігають колір і фактуру за умови дотримання рекомендацій з догляду.</p>
+          </article>
+          <article>
+            <i data-lucide="scan" class="mb-5 h-6 w-6 text-gold" aria-hidden="true"></i>
+            <h3 class="text-sm font-bold">Програма за 1–2 дні</h3>
+            <p class="mt-3 text-xs leading-6 text-muted">Адаптуємо макет до машинної вишивки: від напряму стібків до щільності заповнення.</p>
+          </article>
+          <article>
+            <i data-lucide="layers-3" class="mb-5 h-6 w-6 text-gold" aria-hidden="true"></i>
+            <h3 class="text-sm font-bold">Будь-які тиражі</h3>
+            <p class="mt-3 text-xs leading-6 text-muted">Один особливий подарунок або мерч для всієї компанії. Знижки на замовлення - до 12%.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06. КАЛЬКУЛЯТОР -->
+    <section id="calculator" class="relative border-y border-white/[.08] bg-[#141517] py-20 lg:py-24">
+      <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(199,165,116,0.07),transparent_60%)]"></div>
+      <div class="shell relative">
+        <div class="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+          <div>
+            <span class="eyebrow">02 / Прозорий розрахунок</span>
+            <h2 class="section-title mt-4">Від ідеї до вартості -<br><span class="text-gold">за кілька натискань.</span></h2>
+          </div>
+          <p class="max-w-xs text-sm leading-7 text-muted">
+            Вкажіть параметри та одразу побачте попередню вартість вашого замовлення.
+          </p>
+        </div>
+
+        <div class="overflow-hidden rounded-2xl border border-white/10 bg-panel shadow-2xl shadow-black/20">
+          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/[.08] px-5 py-5 sm:px-8">
+            <div class="flex items-center gap-3">
+              <i data-lucide="calculator" class="h-5 w-5 text-gold" aria-hidden="true"></i>
+              <h3 class="text-sm font-bold">Конструктор вашого замовлення</h3>
+            </div>
+            <span class="rounded-full border border-gold/20 bg-gold/5 px-3 py-1 text-[9px] font-bold uppercase tracking-widest text-gold">
+              Попередня оцінка
+            </span>
+          </div>
+
+          <div class="grid gap-8 p-5 sm:p-8 lg:grid-cols-[.9fr_1.1fr] lg:gap-10">
+            <!-- Завантаження макета -->
+            <div class="min-w-0">
+              <p class="mb-4 text-xs font-bold"><span class="mr-2 text-gold">01.</span> Ваш макет</p>
+
+              <div id="dropZone" class="upload-zone relative flex min-h-[320px] flex-col items-center justify-center rounded-xl p-6 text-center" aria-busy="false">
+                <input id="logoFile" type="file" accept="image/png,image/jpeg,image/webp,image/gif"
+                       class="sr-only" aria-label="Завантажити зображення макета">
+
+                <div id="uploadIdle" class="flex flex-col items-center">
+                  <div class="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl border border-gold/20 bg-gold/5">
+                    <i data-lucide="scan-line" class="h-8 w-8 text-gold" aria-hidden="true"></i>
+                  </div>
+                  <h4 class="text-sm font-bold">🤖 Розумна ШІ-оцінка стібків</h4>
+                  <p class="mt-3 max-w-[270px] text-xs leading-6 text-muted">
+                    Перетягніть сюди логотип для миттєвого аналізу
+                  </p>
+                </div>
+
+                <img id="imagePreview" alt="Попередній перегляд вашого макета"
+                     class="mb-4 hidden h-32 max-w-full rounded-lg bg-white/5 object-contain p-2">
+                <p id="fileName" class="mb-3 hidden max-w-full break-all text-xs text-muted"></p>
+
+                <button id="chooseFile" type="button" class="button button-outline mt-5">
+                  <i data-lucide="upload" class="h-4 w-4" aria-hidden="true"></i>
+                  Вибрати зображення
+                </button>
+                <p class="mt-3 text-[10px] leading-5 text-muted">PNG / JPG / WEBP / GIF · до 10 МБ</p>
+
+                <div id="uploadLoader" class="absolute inset-0 hidden flex-col items-center justify-center gap-5 rounded-xl bg-[#121315]/95 px-5 backdrop-blur-sm">
+                  <div class="loader-ring" aria-hidden="true"></div>
+                  <p class="text-sm font-semibold text-gold">🔮 ШІ аналізує щільність макета...</p>
+                  <p class="text-xs text-muted">Це триватиме близько двох секунд</p>
+                </div>
+              </div>
+
+              <p id="uploadStatus" role="status" aria-live="polite" class="mt-3 min-h-5 text-xs leading-6 text-gold"></p>
+
+              <div class="mt-4 flex gap-3 rounded-lg border border-white/[.07] bg-white/[.02] p-4">
+                <i data-lucide="info" class="mt-1 h-4 w-4 shrink-0 text-gold" aria-hidden="true"></i>
+                <p class="text-[11px] leading-6 text-muted">
+                  <strong class="text-gray-300">Демонстрація ШІ.</strong>
+                  Кількість стібків генерується випадково, без аналізу зображення.
+                  Файл залишається у вашому браузері. Точні дані визначить технолог.
+                </p>
+              </div>
+
+              </div>
+
+            <!-- Форма параметрів -->
+            <form id="calculatorForm" class="min-w-0">
+              <p class="mb-4 text-xs font-bold"><span class="mr-2 text-gold">02.</span> Параметри вишивки</p>
+
+              <label for="ownMaterial" class="mb-5 flex cursor-pointer items-start gap-3 rounded-xl border border-gold/25 bg-gold/5 p-4">
+                <input id="ownMaterial" type="checkbox" checked class="mt-0.5 h-4 w-4 shrink-0 accent-[#c7a574]">
+                <span>
+                  <span class="block text-xs font-bold">Тільки вишивка / Матеріал клієнта</span>
+                  <span class="mt-1 block text-[11px] leading-5 text-muted">Вартість виробу-основи не враховується</span>
+                </span>
+              </label>
+
+              <div class="grid gap-5 sm:grid-cols-2">
+                <div class="sm:col-span-2">
+                  <label for="product" class="field-label">Виріб-основа</label>
+                  <select id="product" class="field" disabled aria-describedby="productHelp">
+                    <option value="">— Не враховувати виріб —</option>
+                    <option value="tshirt">Футболка · +300 грн</option>
+                    <option value="patch">Спортивний костюм · +1000 грн</option>
+                    <option value="cap">Сорочка · +500 грн</option>
+                    <option value="hoodie">Худі · +400 грн</option>
+                  </select>
+                  <p id="productHelp" class="mt-2 text-[10px] leading-5 text-muted">
+                    Використовуємо ваш матеріал. Вартість основи - 0 грн.
+                  </p>
+                </div>
+
+                <div>
+                  <label for="size" class="field-label">Розмір вишивки</label>
+                  <select id="size" class="field" aria-describedby="sizeHelp">
+                    <option value="small">До 5 × 5 см</option>
+                    <option value="medium" selected>До 10 × 10 см</option>
+                    <option value="large">До 20 × 20 см</option>
+                    <option value="xl">До 30 × 30 см</option>
+                  </select>
+                </div>
+                <div class="sm:col-span-2">
+                  <label for="fillPct" class="field-label">
+                    Заповнення макета
+                    <span id="fillPctValue" class="ml-1 rounded bg-white/5 px-1.5 py-0.5 text-[10px] text-gold">60%</span>
+                  </label>
+                  <input id="fillPct" type="range" class="fill-range" min="10" max="100" step="5" value="60"
+                         aria-describedby="sizeHelp" aria-label="Заповнення макета у відсотках">
+                  <p class="mt-1.5 text-[10px] leading-5 text-muted" id="fillPctHelp">
+                    Відсоток області, яку заповнює вишивка. Впливає на кількість стібків.
+                  </p>
+                </div>
+                <div>
+                  <label for="quantity" class="field-label">Тираж, шт.</label>
+                  <input id="quantity" class="field" type="number" min="1" max="100000"
+                         step="1" value="10" inputmode="numeric" required>
+                </div>
+                <div>
+                  <label for="colors" class="field-label">Кількість кольорів</label>
+                  <select id="colors" class="field">
+                    <option value="1">1 колір</option>
+                    <option value="2">2 кольори</option>
+                    <option value="3" selected>3 кольори</option>
+                    <option value="4">4 кольори</option>
+                    <option value="5">5 кольорів</option>
+                    <option value="6">6 кольорів</option>
+                    <option value="7">7 кольорів</option>
+                    <option value="8">8 кольорів</option>
+                    <option value="9">9 кольорів</option>
+                    <option value="10">10 кольорів</option>
+                    <option value="11">11 кольорів</option>
+                    <option value="12">12 кольорів</option>
+                  </select>
+                </div>
+                <div class="sm:col-span-2">
+                  <div class="mb-3">
+                    <label for="complexity" class="field-label">Складність дизайну</label>
+                    <select id="complexity" class="field">
+                      <option value="1.0" selected>1.0 — Надпис або проста фігура</option>
+                      <option value="1.2">1.2 — Надпис + проста фигура</option>
+                      <option value="1.4">1.4 — Складна фигура</option>
+                      <option value="1.7">1.7 — Шеврон</option>
+                      <option value="2.0">2.0 — Художній малюнок (повна зашивка)</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <label for="stitches" class="field-label">Кількість стібків на виріб</label>
+                  <input id="stitches" class="field" type="number" min="0" max="500000"
+                         step="1" value="0" inputmode="numeric" aria-describedby="sizeHelp">
+                </div>
+              </div>
+
+              <p id="sizeHelp" class="mt-3 text-[10px] leading-5 text-muted">
+                Зміна розміру або заповнення встановлює орієнтовну кількість стібків.
+                Поле «Стібки» залишається порожнім - для ручного введення або макета.
+              </p>
+              <p id="calcError" role="status" aria-live="polite" class="mt-3 min-h-5 text-xs leading-5 text-red-300"></p>
+            </form>
+          </div>
+
+          <!-- Підсумки розрахунку -->
+          <div class="border-t border-gold/20 bg-gold/[.045] p-5 sm:p-8">
+            <div aria-live="polite" aria-atomic="true" class="grid gap-6 sm:grid-cols-3">
+              <div>
+                <p class="text-xs text-muted">Ціна за шт. зі знижкою*</p>
+                <p id="unitPrice" class="mt-2 break-words font-display text-2xl tracking-tight">—</p>
+              </div>
+              <div class="sm:border-l sm:border-gold/20 sm:pl-5">
+                <p class="text-xs text-muted">Ваша знижка</p>
+                <p id="discount" class="mt-2 break-words font-display text-2xl tracking-tight text-gold">—</p>
+              </div>
+              <div class="sm:border-l sm:border-gold/20 sm:pl-5">
+                <p class="text-xs text-muted">Підсумкова сума</p>
+                <p id="totalPrice" class="mt-2 break-words font-display text-2xl tracking-tight text-gold lg:text-3xl">—</p>
+              </div>
+            </div>
+            <p id="savings" class="mt-4 text-xs text-muted">—</p>
+            <p id="discountReason" class="mt-1 text-[10px] leading-5 text-muted"></p>
+
+            <div class="mt-6 flex justify-end border-t border-white/[.08] pt-5">
+              <button id="applyEstimate" type="button" class="button button-gold shrink-0">
+                Обговорити замовлення
+                <i data-lucide="arrow-up-right" class="h-4 w-4" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07. ПОРТФОЛІО -->
+    <section id="portfolio" class="py-20 lg:py-28">
+      <div class="shell">
+        <div class="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+          <div>
+            <span class="eyebrow">03 / Деталі мають значення</span>
+            <h2 class="section-title mt-4">Якість, яку хочеться<br><span class="text-muted">роздивитися зблизька.</span></h2>
+          </div>
+          <p class="max-w-xs text-sm leading-7 text-muted">
+            Об’єм, фактура, точність ліній. Вишивка додає речам характер,
+            який неможливо надрукувати.
+          </p>
+        </div>
+
+        <div class="grid auto-rows-[250px] gap-4 sm:grid-cols-2 lg:auto-rows-[260px] lg:grid-cols-3">
+          <figure class="portfolio-card sm:row-span-2">
+            <!-- ИНСТРУКЦИЯ: Замените эту ссылку на ваше реальное фото вышивки/цеха -->
+            <img src="https://i.ibb.co/1fDKp60W/photo-2026-09-16-11-50-42.jpg"
+                 alt="Атмосферна світлина текстильної майстерні" loading="lazy">
+            <figcaption class="portfolio-caption">
+              <span class="text-[9px] uppercase tracking-[.2em] text-gold">Майстерність / 001</span>
+              <h3 class="mt-2 text-lg font-bold">Мистецтво в деталях</h3>
+              <p class="mt-2 text-xs text-gray-300">Від ескізу до останнього стібка</p>
+            </figcaption>
+          </figure>
+
+          <figure class="portfolio-card">
+            <!-- ИНСТРУКЦИЯ: Замените эту ссылку на ваше реальное фото вышивки/цеха -->
+            <img src="https://i.ibb.co/BHtvCS3h/photo-2026-09-16-11-50-47-cr.jpg"
+                 alt="Приклад фактури одягу" loading="lazy">
+            <figcaption class="portfolio-caption">
+              <span class="text-[9px] uppercase tracking-[.2em] text-gold">Фактура / 002</span>
+              <h3 class="mt-2 text-sm font-bold">Відчутний характер</h3>
+            </figcaption>
+          </figure>
+
+          <figure class="portfolio-card">
+            <!-- ИНСТРУКЦИЯ: Замените эту ссылку на ваше реальное фото вышивки/цеха -->
+            <img src="https://i.ibb.co/JWfRZ0JB/IMG-6932.jpg"
+                 alt="Худі для брендованого мерчу" loading="lazy">
+            <figcaption class="portfolio-caption">
+              <span class="text-[9px] uppercase tracking-[.2em] text-gold">Мерч / 003</span>
+              <h3 class="mt-2 text-sm font-bold">Більше, ніж просто одяг</h3>
+            </figcaption>
+          </figure>
+
+          <figure class="portfolio-card lg:col-span-2">
+            <!-- ИНСТРУКЦИЯ: Замените эту ссылку на ваше реальное фото вышивки/цеха -->
+            <img src="https://i.ibb.co/GvvHwXcJ/50904d34-c40f-42dc-ba7a-50690258ebbc.png"
+                 alt="Текстильні фактури для корпоративної колекції" loading="lazy">
+            <figcaption class="portfolio-caption">
+              <span class="text-[9px] uppercase tracking-[.2em] text-gold">Для бізнесу / 004</span>
+              <h3 class="mt-2 text-sm font-bold">Єдиний стиль. До дрібниць.</h3>
+            </figcaption>
+          </figure>
+        </div>
+
+        <!--<p class="mt-4 text-[10px] leading-5 text-muted">
+          У демонстраційній версії використано атмосферні світлини Unsplash, а не реальні роботи студії.
+        </p>-->
+      </div>
+    </section>
+  </main>
+
+  <!-- 08. КОНТАКТИ ТА ПІДВАЛ -->
+  <footer id="contacts" class="border-t border-white/[.08] bg-[#151618]">
+    <div class="shell grid gap-12 py-16 lg:grid-cols-2 lg:gap-20 lg:py-20">
+      <div>
+        <span class="eyebrow">04 / Розпочнімо проєкт</span>
+        <h2 class="section-title mt-4">Маєте ідею?<br><span class="text-gold">Нумо вишивати.</span></h2>
+        <p class="mt-5 max-w-md text-sm leading-7 text-muted">
+          Розкажіть про завдання - допоможемо вибрати матеріал,
+          адаптуємо макет і погодимо деталі виробництва.
+        </p>
+
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a data-social="telegram" href="#contactForm" class="button button-outline">
+            <i data-lucide="send" class="h-4 w-4 text-gold" aria-hidden="true"></i> Telegram
+          </a>
+          <a data-social="whatsapp" href="#contactForm" class="button button-outline">
+            <i data-lucide="message-circle" class="h-4 w-4 text-gold" aria-hidden="true"></i> WhatsApp
+          </a>
+          <a data-social="instagram" href="#contactForm" class="button button-outline">
+            <i data-lucide="instagram" class="h-4 w-4 text-gold" aria-hidden="true"></i> Instagram
+          </a>
+        </div>
+
+        <div class="mt-9 space-y-5">
+          <div class="flex gap-3">
+            <i data-lucide="map-pin" class="mt-1 h-4 w-4 shrink-0 text-gold" aria-hidden="true"></i>
+            <div>
+              <p class="text-xs font-semibold">Наш цех</p>
+              <p id="studioAddress" class="mt-1 text-xs leading-6 text-muted"> вулиця Гранітна, 1, Одеса, Одеська область, 65125 </p>
+              <p class="text-[10px] text-muted">Відвідування - за попередньою домовленістю</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <i data-lucide="phone" class="h-4 w-4 text-gold" aria-hidden="true"></i>
+            <a id="studioPhone" href="#contactForm" class="text-xs text-muted hover:text-gold"> +38(095)-528-98-73</a>
+          </div>
+        </div>
+
+        <div class="mt-9 overflow-hidden rounded-2xl border border-white/[.08]">
+          <iframe
+            src="https://www.google.com/maps?q=46.3992,30.7071&hl=uk&z=15&output=embed"
+            class="block h-56 w-full"
+            title="Карта розташування нашого цеху"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+      <form id="contactForm" class="rounded-2xl border border-white/[.08] bg-ink/50 p-5 sm:p-8">
+        <h3 class="text-lg font-bold">Розкажіть про ваше замовлення</h3>
+        <p class="mt-2 text-xs leading-6 text-muted">Залиште контакт і кілька слів про завдання.</p>
+
+        <div class="mt-6 grid gap-5 sm:grid-cols-2">
+          <div>
+            <label for="customerName" class="field-label">Ваше ім’я</label>
+            <input id="customerName" name="name" class="field" autocomplete="name"
+                   placeholder="Як до вас звертатися?" maxlength="100" required>
+          </div>
+          <div>
+            <label for="customerContact" class="field-label">Телефон або електронна пошта</label>
+            <input id="customerContact" name="contact" class="field"
+                   placeholder="+380… або адреса пошти" minlength="5" maxlength="150" required>
+          </div>
+          <div class="sm:col-span-2">
+            <label for="customerMessage" class="field-label">Про проєкт</label>
+            <textarea id="customerMessage" name="message" class="field min-h-[140px] resize-y"
+                      placeholder="Що вишиваємо, який тираж і коли потрібен результат?"
+                      maxlength="3000" required></textarea>
+          </div>
+        </div>
+
+        <label class="mt-5 flex cursor-pointer items-start gap-3">
+          <input type="checkbox" name="consent" class="mt-1 h-4 w-4 shrink-0 accent-[#c7a574]" required>
+          <span class="text-[10px] leading-5 text-muted">
+            Погоджуюся на використання вказаних контактів для відповіді на мою заявку.
+          </span>
+        </label>
+
+        <button type="submit" class="button button-gold mt-6 w-full">
+          Підготувати заявку
+          <i data-lucide="arrow-up-right" class="h-4 w-4" aria-hidden="true"></i>
+        </button>
+        <p class="mt-3 text-[10px] leading-5 text-muted">
+          Заявка одразу потрапляє в облік студії (Google Таблиця) та Telegram-бот.
+        </p>
+        <p id="contactStatus" role="status" aria-live="polite" class="mt-3 text-xs leading-6 text-gold"></p>
+      </form>
+    </div>
+
+    <div class="border-t border-white/[.08]">
+      <div class="shell flex flex-col justify-between gap-4 py-6 text-[10px] text-muted sm:flex-row sm:items-center">
+        <a href="#" class="font-display text-sm font-semibold tracking-tight text-white">VARBUS<span class="text-gold">/</span></a>
+        <p>© <span id="currentYear"></span> VARBUS. Усі права захищено.</p>
+        <a href="#calculator" class="flex items-center gap-2 hover:text-gold">
+          Від пікселя до стібка
+          <i data-lucide="arrow-up-right" class="h-3 w-3" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <noscript>
+    <div class="shell rounded-lg border border-gold/30 p-4 text-sm text-gold">
+      Увімкніть JavaScript, щоб користуватися калькулятором, завантаженням макета та формою заявки.
+    </div>
+  </noscript>
+
+  <!-- 09. НАЛАШТУВАННЯ ТА ЛОГІКА САЙТУ -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) window.lucide.createIcons();
+
+      const $ = (id) => document.getElementById(id);
+
+      /*
+       * ЄДИНА КОНФІГУРАЦІЯ КОНТАКТІВ.
+       * Перед публікацією заповніть реальними даними.
+       * Для соціальних мереж указуйте повні HTTPS-посилання.
+       *
+       * Приклади:
+       * telegram: 'https://t.me/your_studio'
+       * whatsapp: 'https://wa.me/380955289873'
+       * instagram: 'https://www.instagram.com/varbus.fashion/'
+       */
+      const CONTACTS = {
+        email: 'sadeval2011@gmail.com',
+        phone: '+380955289873',
+        phoneLabel: '+380955289873',
+        address: 'вулиця Гранітна, 1, Одеса, Одеська область, 65125',
+        telegram: 'https://t.me/Sv_rura',
+        whatsapp: 'https://wa.me/380955289873',
+        instagram: 'https://www.instagram.com/varbus.fashion/'
+      };
+
+      /*
+       * РОБОЧІ ПОСИЛАННЯ ДЛЯ FETCH-ЗАПИТІВ.
+       * Всі запити йдуть через ваш веб-застосунок Apps Script (проксі):
+       * він ховає ключ OpenAI від відвідувачів сторінки.
+       *
+       * backendUrl        — посилання на веб-застосунок Apps Script
+       *                     (аналіз макета + запис лидів у Google Таблицю)
+       * telegramBotToken  — токен бота, який ви створили у @BotFather
+       * telegramChatId    — ваш chat id (приклад: 123456789)
+       *
+       * Ключ OpenAI та модель задаються в Apps Script (Script properties),
+       * а не в цьому файлі.
+       *
+       * Поки поле порожнє — відповідна функція працює в демо-режимі без сервера.
+       */
+      const INTEGRATIONS = {
+        backendUrl: 'https://script.google.com/macros/s/AKfycby6cVU2IB3lw2FiVjUPyYepXQ9n9ctKpkPTjNGNXqXzYNIyfdscwKyIpKOW13kGKp4w/exec',
+        telegramBotToken: '1471372087:AAGVgh-VcLg_yJreqYvBWYpCWJ15sOi5_28',
+        telegramChatId: '1205608173'
+      };
+
+      /*
+       * КОНФІГУРАЦІЯ РОЗРАХУНКУ (модель із Code.gs).
+       * Змініть значення на фактичні тарифи студії.
+       */
+      const PRICING = {
+        equipment: {
+          speedRpm: 1200,
+          heads: 3,
+          utilization: 0.85,
+          cost: 200000,
+          delivery: 80000,
+          lifetimeOrders: 150000,
+          threadUtilization: 0.7
+        },
+        embroidery: {
+          stitchesPerMm2: 1.3,   // щільність стібків на мм²
+          defaultFillPct: 60     // % заповнення області макета
+        },
+        rates: {
+          hourPrice: 270,        // грн/год роботи
+          threadPrice: 8,        // грн за 1000 стібків
+          consumablesPct: 10     // % розхідників від основи
+        },
+        products: {
+          tshirt: { label: 'Футболка', base: 300 },
+          patch: { label: 'Спортивний костюм', base: 1000 },
+          cap: { label: 'Сорочка', base: 500 },
+          hoodie: { label: 'Худі', base: 400 }
+        },
+        // Область вишивки, мм (за розміром зі списку)
+        sizeMm: {
+          small:  { w: 50, h: 50 },
+          medium: { w: 100, h: 100 },
+          large:  { w: 200, h: 200 },
+          xl:     { w: 300, h: 300 }
+        },
+        // Мінімально допустима ціна, грн за 1000 стібків
+        minPerThousand: {
+          full: 8,
+          own: 10
+        },
+        // Знижки (плавні): точки кривої [значення, %], між ними — лінійне зростання.
+        // До першої точки скидки немає. Приклад: тираж 75 → між 50(5%) і 100(8%) => 6.5%.
+        discounts: {
+          byQtyFull: [[1000, 15], [500, 12], [200, 10], [100, 8], [50, 5], [10, 3]],
+          byQtyOwn:  [[1000, 15], [500, 12], [200, 10], [100, 8], [50, 5], [10, 3]],
+          bySum:     [[50000, 12], [20000, 8], [10000, 5], [5000, 3]]
+        }
+      };
+
+      // Українське форматування чисел і гривні (без копійок).
+      const currencyFormatter = new Intl.NumberFormat('uk-UA', {
+        style: 'currency',
+        currency: 'UAH',
+        currencyDisplay: 'symbol',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+      });
+      const numberFormatter = new Intl.NumberFormat('uk-UA');
+      const money = (value) => currencyFormatter.format(value);
+      const formatNumber = (value) => numberFormatter.format(value);
+
+      $('currentYear').textContent = new Date().getFullYear();
+
+      // Мобільне меню.
+      function closeMenu() {
+        $('mobileMenu').classList.add('hidden');
+        $('menuButton').setAttribute('aria-expanded', 'false');
+        $('menuButton').setAttribute('aria-label', 'Відкрити меню');
+      }
+
+      $('menuButton').addEventListener('click', () => {
+        const expanded = $('menuButton').getAttribute('aria-expanded') === 'true';
+        $('mobileMenu').classList.toggle('hidden', expanded);
+        $('menuButton').setAttribute('aria-expanded', String(!expanded));
+        $('menuButton').setAttribute('aria-label', expanded ? 'Відкрити меню' : 'Закрити меню');
+      });
+
+      $('mobileMenu').querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', closeMenu);
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && $('menuButton').getAttribute('aria-expanded') === 'true') {
+          closeMenu();
+          $('menuButton').focus();
+        }
+      });
+
+      /*
+       * СТАН ВИРОБУ-ОСНОВИ.
+       * За матеріалу клієнта:
+       * — зберігаємо попередній вибір;
+       * — очищаємо значення;
+       * — блокуємо список;
+       * — прибираємо обов’язковість.
+       * Після вимкнення опції відновлюємо попередню основу.
+       */
+      const calculatorForm = $('calculatorForm');
+      const ownMaterial = $('ownMaterial');
+      const productSelect = $('product');
+      let lastSelectedProduct = 'tshirt';
+      let currentEstimate = null;
+      let lastStitchSource = 'size'; // джерело стібків: 'size' | 'manual' | 'ai'
+
+      function syncMaterialState() {
+        const isOwnMaterial = ownMaterial.checked;
+
+        if (isOwnMaterial) {
+          if (PRICING.products[productSelect.value]) {
+            lastSelectedProduct = productSelect.value;
+          }
+          productSelect.value = '';
+          productSelect.disabled = true;
+          productSelect.required = false;
+          $('productHelp').textContent =
+            'Використовуємо ваш матеріал. Вартість основи — 0 грн.';
+        } else {
+          productSelect.disabled = false;
+          productSelect.required = true;
+          if (!PRICING.products[productSelect.value]) {
+            productSelect.value = lastSelectedProduct;
+          }
+          $('productHelp').textContent =
+            'Вартість вибраної основи додається до кожного виробу в тиражі.';
+        }
+
+        productSelect.options[0].disabled = !isOwnMaterial;
+      }
+
+      // Пороги тиражу включні. Пороги суми — строго «більше».
+      function getDiscount(quantity, subtotal, isOwnMaterial) {
+        const quantityTiers = isOwnMaterial
+          ? PRICING.discounts.byQtyOwn
+          : PRICING.discounts.byQtyFull;
+        const amountTiers = PRICING.discounts.bySum;
+
+        const quantityDiscount = pickDiscount(quantityTiers, quantity);
+        const amountDiscount = pickDiscount(amountTiers, subtotal);
+
+        return {
+          quantityDiscount,
+          amountDiscount,
+          discount: Math.max(quantityDiscount, amountDiscount)
+        };
+      }
+
+      // Плавна знижка: між точками кривої — лінійна інтерполяція, до першої точки — 0.
+      function pickDiscount(tiers, value) {
+        const pts = tiers.slice().sort((a, b) => a[0] - b[0]);
+        if (!pts.length || value < pts[0][0]) return 0;
+        for (let i = 1; i < pts.length; i++) {
+          if (value < pts[i][0]) {
+            const [x0, y0] = pts[i - 1];
+            const [x1, y1] = pts[i];
+            const pct = y0 + ((value - x0) / (x1 - x0)) * (y1 - y0);
+            return Math.round(pct * 10) / 10;
+          }
+          if (value === pts[i][0]) return pts[i][1];
+        }
+        return pts[pts.length - 1][1];
+      }
+
+      // Оцінка стібків за розміром вишивки в мм та заповненням макета.
+      function estimateStitches(sizeKey, fillPct) {
+        const mm = PRICING.sizeMm[sizeKey];
+        if (!mm) return 0;
+        const fill = Math.max(0, Math.min(100, fillPct ?? PRICING.embroidery.defaultFillPct)) / 100;
+        const area = mm.w * mm.h;
+        return Math.round(area * fill * PRICING.embroidery.stitchesPerMm2);
+      }
+
+      // Чиста функція розрахунку без залежності від інтерфейсу.
+      // Базова ціна за ownMaterial === true завжди дорівнює нулю.
+      function computeEstimate({ productKey, isOwnMaterial, sizeKey, fillPct, stitches, quantity, colors, complexity, stitchSource }) {
+        const product = isOwnMaterial ? null : PRICING.products[productKey];
+        const basePrice = isOwnMaterial ? 0 : product.base;
+
+        // Визначення кількості стібків: розмір за замовчуванням, ручне введення або ШІ.
+        const estimated = estimateStitches(sizeKey, fillPct);
+        const manual = Math.max(0, Number(stitches) || 0);
+        const stitchesSource = stitchSource || (manual > 0 ? 'manual' : 'size');
+        const effectiveStitches = (stitchesSource === 'size' && estimated > 0)
+          ? estimated
+          : (manual > 0 ? manual : estimated);
+
+        // Трудозатрати (модель: робота — із кожної штуки, підготовка — раз на цикл).
+        // Шиття, зап'ялювання/зняття, переоснастка й робота з матеріалом клієнта
+        // рахуються ЗА КОЖНУ ШТУКУ — тираж збільшує час роботи (матеріалу витрачається більше).
+        // Підготовка машини (програма, зміна ниток за кольорами) та електрика —
+        // ОДИН РАЗ НА ЦИКЛ: на 3-головій машині партія до 3 шт шиється «в один присід»,
+        // тому замовлення на 1 шт трохи дорожча в перерахунку на штуку (небагато).
+        const heads = PRICING.equipment.heads;
+        const cycles = Math.max(1, Math.ceil(quantity / heads));
+        const sewingPerItem = effectiveStitches / (PRICING.equipment.speedRpm * PRICING.equipment.utilization) / 60;
+        const hoopingPerItem = 0.32;                     // зап'ялювання/наладка штуки (~19 хв)
+        const changeoverPerItem = 0.05;                  // переоснастка на штуку (~3 хв)
+        const clientHandlingPerItem = isOwnMaterial ? 0.06 : 0;  // робота з матеріалом клієнта (~3.5 хв)
+        const machineSetupPerCycle = 0.10 + (colors * 0.02);     // підготовка машини на цикл
+        const energyPerCycle = 0.03;                     // електрика на цикл
+
+        const embroideryHours = quantity * sewingPerItem;         // чисте шиття на весь тираж
+        const laborHours = quantity * (sewingPerItem + hoopingPerItem + changeoverPerItem + clientHandlingPerItem)
+                         + cycles * (machineSetupPerCycle + energyPerCycle);
+        const timeCost = laborHours * PRICING.rates.hourPrice;   // всього на тираж
+
+        // Матеріали: нитки, розхідники, амортизація
+        const threadCost = (PRICING.rates.threadPrice * effectiveStitches * PRICING.equipment.threadUtilization) / 1000;
+        const amortizationPerItem = (PRICING.equipment.cost + PRICING.equipment.delivery) / PRICING.equipment.lifetimeOrders;
+        const consumables = isOwnMaterial
+          ? (threadCost * 0.5) + (effectiveStitches * 0.0005)
+          : (basePrice * (PRICING.rates.consumablesPct / 100)) + (effectiveStitches * 0.0002);
+        const materialsPerItem = threadCost + consumables + amortizationPerItem;
+
+        const complexityMultiplier = 1 + ((complexity - 1) * 0.3);
+        const embroideryCost = ((timeCost / quantity) + materialsPerItem) * complexityMultiplier;
+
+        const unitBeforeDiscount = basePrice + embroideryCost;
+        const subtotal = unitBeforeDiscount * quantity;
+        const discounts = getDiscount(quantity, subtotal, isOwnMaterial);
+        const total = subtotal * (1 - discounts.discount / 100);
+        const unitPrice = total / quantity;
+        const savings = subtotal - total;
+
+        // Мінімальна ціна
+        const minPerThousand = isOwnMaterial ? PRICING.minPerThousand.own : PRICING.minPerThousand.full;
+        const minAcceptable = (effectiveStitches / 1000) * minPerThousand * quantity;
+        const warning = total < minAcceptable ? 'ВНИМАНИЕ: ціна нижча за мінімально допустиму.' : '';
+
+        return {
+          productLabel: isOwnMaterial ? 'Матеріал клієнта' : product.label,
+          isOwnMaterial, stitches: effectiveStitches, quantity, colors, complexity,
+          basePrice, embroideryHours, laborHours, timeCost, threadCost,
+          consumables, amortizationPerItem, materialsPerItem, embroideryCost,
+          unitBeforeDiscount, subtotal, total, unitPrice, savings, warning,
+          stitchesSource, estimated, sizeKey,
+          ...discounts
+        };
+      }
+
+      const resultIds = [
+        'unitPrice', 'discount', 'totalPrice'
+      ];
+
+      function invalidateCalculation(message) {
+        currentEstimate = null;
+        $('calcError').textContent = message;
+        resultIds.forEach((id) => $(id).textContent = '—');
+        $('savings').textContent = '—';
+        $('discountReason').textContent = '';
+        $('applyEstimate').disabled = true;
+      }
+
+      function calculate() {
+        const quantity = Number($('quantity').value);
+        const stitches = Number($('stitches').value);
+        const colors = Number($('colors').value);
+        const complexity = Number($('complexity').value) || 1;
+
+        if (
+          !calculatorForm.checkValidity() ||
+          !Number.isInteger(quantity) ||
+          !Number.isInteger(stitches) ||
+          !Number.isInteger(colors) ||
+          colors < 1 || colors > 12 ||
+          (!ownMaterial.checked && !PRICING.products[productSelect.value])
+        ) {
+          invalidateCalculation(
+            'Вкажіть цілий тираж від 3 та виберіть основу, якщо вона потрібна. Кількість стібків визначиться за розміром вишивки автоматично.'
+          );
+          return;
+        }
+
+        $('calcError').textContent = '';
+        $('applyEstimate').disabled = false;
+
+        const sizeKey = $('size').value;
+        const fillPct = Number($('fillPct').value) || PRICING.embroidery.defaultFillPct;
+        const estimate = computeEstimate({
+          productKey: productSelect.value,
+          isOwnMaterial: ownMaterial.checked,
+          sizeKey,
+          fillPct,
+          stitches,
+          quantity,
+          colors,
+          complexity,
+          stitchSource: lastStitchSource
+        });
+
+        currentEstimate = {
+          ...estimate,
+          sizeLabel: $('size').selectedOptions[0].textContent
+        };
+
+        $('unitPrice').textContent = money(estimate.unitPrice);
+        $('discount').textContent = `−${estimate.discount}%`;
+        $('totalPrice').textContent = money(estimate.total);
+        $('savings').textContent = `Економія: ${money(estimate.savings)}.`;
+        $('discountReason').textContent =
+          `Знижка за тираж ${estimate.quantityDiscount}%, за суму ${estimate.amountDiscount}%. Застосовано найбільшу.`;
+
+        const srcLabel = estimate.stitchesSource === 'size'
+          ? `Розмір (${formatNumber(estimate.estimated)} стібків)`
+          : estimate.stitchesSource === 'ai'
+            ? 'ШІ-оцінка за макетом'
+            : 'Ручне введення';
+        $('uploadStatus').textContent = `Стібки: ${srcLabel}.`;
+        if (estimate.warning) $('calcError').textContent = estimate.warning;
+      }
+
+      calculatorForm.addEventListener('submit', (event) => event.preventDefault());
+
+      const fillPctSlider = $('fillPct');
+      const fillPctLabel = $('fillPctValue');
+
+      function currentFillPct() {
+        return Number(fillPctSlider.value) || PRICING.embroidery.defaultFillPct;
+      }
+
+      function refreshFillPctLabel() {
+        fillPctLabel.textContent = fillPctSlider.value + '%';
+      }
+
+      // Один обробник для перемикачів і списків: спочатку стан, потім обчислення.
+      calculatorForm.addEventListener('change', (event) => {
+        if (event.target === ownMaterial) {
+          syncMaterialState();
+        }
+
+        if (event.target === productSelect && PRICING.products[productSelect.value]) {
+          lastSelectedProduct = productSelect.value;
+        }
+
+        if (event.target === $('size')) {
+          lastStitchSource = 'size';
+          const est = estimateStitches($('size').value, currentFillPct());
+          $('uploadStatus').textContent =
+            `Орієнтовна оцінка за розміром та заповненням: ${formatNumber(est)} стібків.`;
+        }
+
+        if (event.target === fillPctSlider) {
+          refreshFillPctLabel();
+          lastStitchSource = 'size';
+          const est = estimateStitches($('size').value, currentFillPct());
+          $('uploadStatus').textContent =
+            `Орієнтовна оцінка за розміром та заповненням: ${formatNumber(est)} стібків.`;
+        }
+
+        if (event.target === $('stitches')) {
+          lastStitchSource = 'manual';
+        }
+
+        calculate();
+      });
+
+      // Живе оновлення мітки заповнення під час перетягування повзунка.
+      fillPctSlider.addEventListener('input', () => {
+        refreshFillPctLabel();
+      });
+
+      calculatorForm.addEventListener('input', (event) => {
+        if (event.target === $('quantity') || event.target === $('stitches')) {
+          if (event.target === $('stitches')) lastStitchSource = 'manual';
+          calculate();
+        }
+      });
+
+      /*
+       * ЗАВАНТАЖЕННЯ МАКЕТА ТА СИМУЛЯЦІЯ ШІ.
+       * Перевіряємо формат, розмір і можливість декодування зображення.
+       * Лічильник запитів захищає від результатів застарілого завантаження.
+       */
+      const dropZone = $('dropZone');
+      const fileInput = $('logoFile');
+      const allowedTypes = new Set(['image/png', 'image/jpeg', 'image/webp', 'image/gif']);
+      let uploadVersion = 0;
+      let analysisTimer = null;
+      let previewURL = null;
+      let dragDepth = 0;
+      // Останній завантажений макет (base64) — піде разом із заявкою до таблиці та Telegram.
+      let latestImageDataURL = null;
+
+      function setLoading(loading) {
+        $('uploadLoader').classList.toggle('hidden', !loading);
+        $('uploadLoader').classList.toggle('flex', loading);
+        dropZone.setAttribute('aria-busy', String(loading));
+        $('chooseFile').disabled = loading;
+      }
+
+      function cancelAnalysis() {
+        uploadVersion++;
+        clearTimeout(analysisTimer);
+        setLoading(false);
+      }
+
+      /*
+       * Стискає зображення до 1024 px і повертає base64 (JPEG).
+       * Так заявка на Apps Script лишається маленькою і швидкою.
+       */
+      function downscaleImage(image, maxDim) {
+        const w = image.naturalWidth;
+        const h = image.naturalHeight;
+        const scale = Math.min(1, maxDim / Math.max(w, h));
+        const w2 = Math.max(1, Math.round(w * scale));
+        const h2 = Math.max(1, Math.round(h * scale));
+        const canvas = document.createElement('canvas');
+        canvas.width = w2;
+        canvas.height = h2;
+        canvas.getContext('2d').drawImage(image, 0, 0, w2, h2);
+        return canvas.toDataURL('image/jpeg', 0.85);
+      }
+
+      /*
+       * Аналіз макета через веб-застосунок Apps Script (проксі).
+       * Проксі викликає OpenAI Vision і повертає кількість стібків —
+       * ключ OpenAI залишається на сервері, а не в коді сторінки.
+       * Content-Type text/plain дає змогу обійти CORS preflight.
+       * Якщо backendUrl не задано — повертаємо чесну оцінку за розміром.
+       */
+      async function requestAIEstimate(dataURL, sizeKey, fillPct) {
+        const areaEstimate = estimateStitches(sizeKey, fillPct);
+        if (!INTEGRATIONS.backendUrl) return areaEstimate;
+
+        const response = await fetch(INTEGRATIONS.backendUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'estimate',
+            image: dataURL,
+            contentType: 'image/jpeg',
+            sizeKey,
+            fillPct
+          })
+        });
+
+        const result = await response.json();
+        if (!result.ok) throw new Error(result.error || 'Помилка аналізу');
+
+        const stitches = Math.round(Number(result.stitches));
+        if (!Number.isFinite(stitches) || stitches <= 0) {
+          throw new Error('Сервіс повернув некоректну кількість стібків');
+        }
+        return stitches;
+      }
+
+      function simulateAI(file) {
+        cancelAnalysis();
+        const version = uploadVersion;
+
+        if (!file || !allowedTypes.has(file.type)) {
+          $('uploadStatus').textContent = 'Виберіть зображення у форматі PNG, JPG, WEBP або GIF.';
+          return;
+        }
+
+        if (file.size > 10 * 1024 * 1024) {
+          $('uploadStatus').textContent = 'Файл завеликий. Максимальний розмір — 10 МБ.';
+          return;
+        }
+
+        $('uploadStatus').textContent = 'Перевіряємо зображення…';
+        const candidateURL = URL.createObjectURL(file);
+        const image = new Image();
+
+        image.onload = async () => {
+          if (version !== uploadVersion) {
+            URL.revokeObjectURL(candidateURL);
+            return;
+          }
+
+          if (previewURL) URL.revokeObjectURL(previewURL);
+          previewURL = candidateURL;
+
+          $('imagePreview').src = previewURL;
+          $('imagePreview').classList.remove('hidden');
+          $('uploadIdle').classList.add('hidden');
+          $('fileName').textContent = file.name;
+          $('fileName').classList.remove('hidden');
+
+          setLoading(true);
+          $('uploadStatus').textContent = 'ШІ аналізує щільність макета…';
+
+          latestImageDataURL = downscaleImage(image, 1024);
+
+          if (INTEGRATIONS.backendUrl) {
+            // Реальний аналіз через проксі Apps Script (OpenAI Vision на сервері).
+            try {
+              const stitches = await requestAIEstimate(
+                latestImageDataURL,
+                $('size').value,
+                currentFillPct()
+              );
+              if (version !== uploadVersion) return;
+
+              lastStitchSource = 'ai';
+              $('stitches').value = stitches;
+              setLoading(false);
+              calculate();
+
+              $('uploadStatus').textContent =
+                `ШІ-оцінка: ${formatNumber(stitches)} стібків. ` +
+                (currentEstimate
+                  ? 'Вартість перераховано.'
+                  : 'Для розрахунку перевірте інші поля форми.');
+              return;
+            } catch (err) {
+              if (version !== uploadVersion) return;
+              setLoading(false);
+              $('uploadStatus').textContent =
+                `Не вдалося отримати оцінку: ${err.message || 'Спробуйте ще раз.'}`;
+              return;
+            }
+          }
+
+          // Демо-режим без бекенду: оцінка на основі розміру з відхиленням ±15%.
+          analysisTimer = setTimeout(() => {
+            if (version !== uploadVersion) return;
+
+            const sizeEstimate = estimateStitches($('size').value, currentFillPct());
+            const sut = Math.max(100, Math.round(sizeEstimate * (0.85 + Math.random() * 0.3)));
+            lastStitchSource = 'ai';
+            $('stitches').value = sut;
+
+            setLoading(false);
+            calculate();
+
+            $('uploadStatus').textContent =
+              `ШІ-оцінка: ${formatNumber(sut)} стібків (розмір ${formatNumber(sizeEstimate)}). ` +
+              (currentEstimate
+                ? 'Вартість перераховано.'
+                : 'Для розрахунку перевірте інші поля форми.');
+          }, 800);
+        };
+
+        image.onerror = () => {
+          URL.revokeObjectURL(candidateURL);
+          if (version !== uploadVersion) return;
+          setLoading(false);
+          $('uploadStatus').textContent = 'Не вдалося прочитати зображення. Спробуйте інший файл.';
+        };
+
+        image.src = candidateURL;
+      }
+
+      $('chooseFile').addEventListener('click', () => fileInput.click());
+
+      fileInput.addEventListener('change', () => {
+        const file = fileInput.files[0];
+        if (file) simulateAI(file);
+        fileInput.value = '';
+      });
+
+      dropZone.addEventListener('dragenter', (event) => {
+        event.preventDefault();
+        dragDepth++;
+        dropZone.classList.add('is-dragging');
+      });
+
+      dropZone.addEventListener('dragover', (event) => {
+        event.preventDefault();
+        if (event.dataTransfer) event.dataTransfer.dropEffect = 'copy';
+      });
+
+      dropZone.addEventListener('dragleave', (event) => {
+        event.preventDefault();
+        dragDepth = Math.max(0, dragDepth - 1);
+        if (!dragDepth) dropZone.classList.remove('is-dragging');
+      });
+
+      dropZone.addEventListener('drop', (event) => {
+        event.preventDefault();
+        dragDepth = 0;
+        dropZone.classList.remove('is-dragging');
+
+        const files = event.dataTransfer?.files;
+        if (!files?.length) return;
+
+        if (files.length !== 1) {
+          cancelAnalysis();
+          $('uploadStatus').textContent = 'Завантажуйте один макет за раз.';
+          return;
+        }
+
+        simulateAI(files[0]);
+      });
+
+      // Запобігаємо відкриттю файлу браузером під час випадкового перетягування за межі зони.
+      ['dragover', 'drop'].forEach((type) => {
+        window.addEventListener(type, (event) => {
+          if (Array.from(event.dataTransfer?.types || []).includes('Files')) {
+            event.preventDefault();
+          }
+        });
+      });
+
+      // Перенесення актуального розрахунку до заявки.
+      $('applyEstimate').addEventListener('click', () => {
+        if (!currentEstimate) return;
+        const e = currentEstimate;
+
+        $('customerMessage').value = [
+          'Вітаю! Хочу обговорити замовлення на вишивку.',
+          `Матеріал / основа: ${e.productLabel}.`,
+          `Розмір вишивки: ${e.sizeLabel}.`,
+          `Тираж: ${formatNumber(e.quantity)} шт. Кольорів: ${e.colors}. Складність: ${e.complexity}.`,
+          `Стібків на виріб: ${formatNumber(e.stitches)} — попередньо.`,
+          `Ціна за шт.: ${money(e.unitPrice)} (основа ${money(e.basePrice)} + вишивка ${money(e.embroideryCost)}).`,
+          `Сума до знижки: ${money(e.subtotal)}. Знижка: −${e.discount}% (економія ${money(e.savings)}).`,
+          `Попередній підсумок: ${money(e.total)}.`,
+          'Бажаний термін: '
+        ].join('\n');
+
+        $('contactStatus').textContent =
+          'Параметри розрахунку додано. Укажіть ім’я, контакт і бажаний термін.';
+
+        $('contacts').scrollIntoView({
+          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+        });
+        $('customerName').focus({ preventScroll: true });
+      });
+
+      // Усі кнопки мереж у шапці, мобільному меню та підвалі беруть адреси з CONTACTS.
+      function getSafeSocialURL(value) {
+        if (!value) return '';
+        try {
+          const url = new URL(value);
+          return url.protocol === 'https:' ? url.href : '';
+        } catch {
+          return '';
+        }
+      }
+
+      document.querySelectorAll('[data-social]').forEach((link) => {
+        const url = getSafeSocialURL(CONTACTS[link.dataset.social]);
+
+        if (url) {
+          link.href = url;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+        } else {
+          link.href = '#contactForm';
+          link.addEventListener('click', () => {
+            $('contactStatus').textContent =
+              'У демонстраційній версії це посилання ще не налаштоване. Додайте адресу сторінки студії в об’єкт CONTACTS.';
+          });
+        }
+      });
+
+      if (CONTACTS.address) $('studioAddress').textContent = CONTACTS.address;
+
+      if (CONTACTS.phone) {
+        $('studioPhone').textContent = CONTACTS.phoneLabel || CONTACTS.phone;
+        $('studioPhone').href = `tel:${CONTACTS.phone.replace(/[^\d+]/g, '')}`;
+      }
+
+      /*
+       * ФОРМА ЗАЯВКИ.
+       * 1) Пише лід у ваш Google Таблицю через веб-застосунок Apps Script.
+       * 2) Дублює замовлення в Telegram-бот (прямий fetch до Bot API).
+       * Якщо опції не заповнені — працює демо-режим без надсилання.
+       */
+      function currentEstimateSummary(e) {
+        return [
+          `Виріб: ${e.productLabel}`,
+          `Розмір: ${e.sizeLabel || e.sizeKey}, заповнення ${currentFillPct()}%`,
+          `Стібків: ${formatNumber(e.stitches)} (джерело: ${e.stitchesSource})`,
+          `Тираж: ${e.quantity} шт., кольорів: ${e.colors}, складність: ${e.complexity}/5`,
+          `Знижка: за тираж ${e.quantityDiscount}%, за суму ${e.amountDiscount}%, застосовано ${e.discount}%.`,
+          `Разом: ${money(e.total)} (економія ${money(e.savings)})`
+        ].join('\n');
+      }
+
+      /*
+       * Запис лида в Google Таблицю.
+       * запит іде на ваш веб-застосунок Apps Script (проксі),
+       * бо браузер не може писати в Таблицю напряму.
+       */
+      async function saveLeadToSheet(name, contact, message, calc, image) {
+        const response = await fetch(INTEGRATIONS.backendUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'lead',
+            name, contact, message, calc,
+            image: image || ''
+          })
+        });
+        const result = await response.json();
+        if (!result.ok) throw new Error(result.error || 'Не вдалося записати в Таблицю');
+      }
+
+      /* Пряма відправка замовлення в Telegram-бот (без фото, якщо макет не завантажений). */
+      function tgEscape(text) {
+        return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
+      async function sendOrderToTelegram(name, contact, message, calc) {
+        const text = [
+          '🔔 Нова заявка на вишивку',
+          `Ім’я: ${name}`,
+          `Контакт: ${contact}`,
+          '',
+          `Замовлення:`,
+          message,
+          calc ? `\nРозрахунок:\n${calc}` : ''
+        ].join('\n');
+
+        const response = await fetch(
+          `https://api.telegram.org/bot${INTEGRATIONS.telegramBotToken}/sendMessage`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              chat_id: INTEGRATIONS.telegramChatId,
+              text,
+              disable_web_page_preview: true
+            })
+          }
+        );
+        const result = await response.json();
+        if (!response.ok || !result.ok) {
+          throw new Error(result.description || `Telegram: HTTP ${response.status}`);
+        }
+      }
+
+      /* Відправка макета (картинки) в Telegram-бот разом із заявкою. */
+      async function sendOrderPhotoToTelegram(imageDataURL, caption) {
+        const blob = await (await fetch(imageDataURL)).blob();
+        const form = new FormData();
+        form.append('chat_id', INTEGRATIONS.telegramChatId);
+        form.append('photo', blob, 'maket.jpg');
+        form.append('caption', caption);
+        form.append('parse_mode', 'HTML');
+        form.append('disable_web_page_preview', true);
+
+        const response = await fetch(
+          `https://api.telegram.org/bot${INTEGRATIONS.telegramBotToken}/sendPhoto`,
+          { method: 'POST', body: form }
+        );
+        const result = await response.json();
+        if (!response.ok || !result.ok) {
+          throw new Error(result.description || `Telegram фото: HTTP ${response.status}`);
+        }
+      }
+
+      $('contactForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const name = $('customerName').value.trim();
+        const contact = $('customerContact').value.trim();
+        const message = $('customerMessage').value.trim();
+
+        if (!name || contact.length < 5 || !message) {
+          $('contactStatus').textContent = 'Заповніть ім’я, контакт і опис замовлення.';
+          return;
+        }
+
+        if (!INTEGRATIONS.backendUrl && !INTEGRATIONS.telegramBotToken) {
+          $('contactStatus').textContent =
+            'Демонстраційний режим: заявку не надіслано. Заповніть INTEGRATIONS у файлі.';
+          return;
+        }
+
+        const submitBtn = event.submitter || $('contactForm').querySelector('[type="submit"]');
+        submitBtn.disabled = true;
+        $('contactStatus').textContent = 'Надсилаємо заявку…';
+
+        const calc = currentEstimate ? currentEstimateSummary(currentEstimate) : '';
+        const errors = [];
+
+        if (INTEGRATIONS.backendUrl) {
+          try {
+            await saveLeadToSheet(name, contact, message, calc, latestImageDataURL);
+          } catch (err) {
+            errors.push(err.message);
+          }
+        }
+
+        if (INTEGRATIONS.telegramBotToken && INTEGRATIONS.telegramChatId) {
+          try {
+            const caption = [
+              '<b>🔔 Нова заявка на вишивку</b>',
+              `Ім’я: ${tgEscape(name)}`,
+              `Контакт: ${tgEscape(contact)}`,
+              '',
+              `<i>Замовлення:</i>\n${tgEscape(message)}`,
+              calc ? `\n<i>Розрахунок:</i>\n${tgEscape(calc)}` : ''
+            ].join('\n');
+            if (latestImageDataURL) {
+              await sendOrderPhotoToTelegram(latestImageDataURL, caption);
+            } else {
+              await sendOrderToTelegram(name, contact, message, calc);
+            }
+          } catch (err) {
+            errors.push(err.message);
+          }
+        }
+
+        submitBtn.disabled = false;
+
+        if (errors.length) {
+          $('contactStatus').textContent = `Не вдалося надіслати: ${errors.join('; ')}`;
+          return;
+        }
+
+$('contactForm').reset();
+          latestImageDataURL = null;
+          $('contactStatus').textContent =
+          'Дякуємо! Заявку прийнято, ми зв’яжемося з вами найближчим часом.';
+      });
+
+      // Початковий стан: лише вишивка, заблокована порожня основа, базова ціна 0.
+      syncMaterialState();
+      lastStitchSource = 'size';
+      fillPctSlider.value = PRICING.embroidery.defaultFillPct;
+      refreshFillPctLabel();
+      calculate();
+    });
+  </script>
+</body>
+</html>
