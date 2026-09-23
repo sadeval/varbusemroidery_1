@@ -123,6 +123,36 @@
       position: absolute; inset: auto 0 0;
       padding: 50px 22px 22px; background: linear-gradient(transparent, #000d);
     }
+    .faq-item {
+      border: 1px solid #ffffff14;
+      background: #191a1d;
+      border-radius: 12px;
+      padding: 0 22px;
+    }
+    .faq-item + .faq-item { margin-top: 12px; }
+    .faq-item summary {
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 0;
+      font-size: 14px;
+      font-weight: 700;
+      transition: color .2s;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after { content: '+'; color: #c7a574; font-size: 20px; line-height: 1; }
+    .faq-item[open] summary::after { content: '\2013'; }
+    .faq-item summary:hover { color: #c7a574; }
+    .faq-item p {
+      padding-bottom: 18px;
+      font-size: 13px;
+      line-height: 1.75;
+      color: #a5a5ad;
+    }
+
     @keyframes spin { to { transform: rotate(360deg); } }
 
     @media (max-width: 640px) {
@@ -143,6 +173,106 @@
   </style>
 
   <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://varbusembroidery.com.ua/#website",
+        "url": "https://varbusembroidery.com.ua/",
+        "name": "VARBUS — промислова машинна вишивка",
+        "description": "Промислова машинна вишивка на професійному обладнанні. Брендування одягу, шеврони, корпоративний текстиль. Розрахуйте вартість онлайн.",
+        "inLanguage": "uk"
+      },
+      {
+        "@type": "LocalBusiness",
+        "@id": "https://varbusembroidery.com.ua/#business",
+        "name": "VARBUS",
+        "alternateName": "VARBUS — промислова машинна вишивка",
+        "url": "https://varbusembroidery.com.ua/",
+        "image": "https://varbusembroidery.com.ua/media/photos/IMG-7675-cr.jpg",
+        "description": "Студія промислової машинної вишивки: брендування одягу, шеврони та нашивки, корпоративний текстиль. Мінімальне замовлення — від 3 виробів. Доставка по Україні.",
+        "telephone": "+380955289873",
+        "email": "sadeval2011@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "вулиця Гранітна, 1",
+          "addressLocality": "Одеса",
+          "addressRegion": "Одеська область",
+          "postalCode": "65125",
+          "addressCountry": "UA"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 46.3992,
+          "longitude": 30.7071
+        },
+        "areaServed": "Україна",
+        "sameAs": [
+          "https://www.instagram.com/varbus.fashion/",
+          "https://t.me/Sv_rura",
+          "https://wa.me/380955289873"
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://varbusembroidery.com.ua/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Скільки коштує вишивка логотипа?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Вартість залежить від розміру, кількості стібків і кольорів — точну ціну показує калькулятор на сайті. Макет адаптуємо під машинну вишивку (напрям стібків, щільність), навіть якщо логотип ще не готовий до вишивки."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Який мінімальне замовлення?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Працюємо від 3 виробів — для тесту, подарунка або пробного тиражу. На гуртових тиражах діють знижки."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Чи вишиваєте на моєму матеріалі?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Так. Позначте в калькуляторі «Тільки вишивка / Матеріал клієнта» — ми вишиваємо на вашому одязі, а вартість виробу-основи не враховується."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Скільки часу займає виконання?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Програму під макет готуємо за 1–2 дні. Терміни виробництва узгоджуємо одразу після розрахунку — вони залежать від тиражу та складності дизайну."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Доставляєте по Україні?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Так, доставляємо по всій Україні. Цех — в Одесі, відвідування за попередньою домовленістю."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Як оформити замовлення?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Напишіть через форму в розділі «Контакти», у Telegram або зателефонуйте — відповімо з розрахунком і наступними кроками."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body class="bg-ink font-sans text-white antialiased">
@@ -664,13 +794,53 @@
         </p>-->
       </div>
     </section>
+
+    <!-- 08. ЧАСТІ ПИТАННЯ -->
+    <section id="faq" class="pb-20 lg:pb-28" aria-labelledby="faqTitle">
+      <div class="shell">
+        <span class="eyebrow">04 / Часті питання</span>
+        <h2 id="faqTitle" class="section-title mt-4">Що питають<br><span class="text-muted">найчастіше.</span></h2>
+
+        <div class="mt-10 max-w-3xl">
+          <details class="faq-item">
+            <summary>Скільки коштує вишивка логотипа?</summary>
+            <p>Вартість залежить від розміру, кількості стібків і кольорів — точну ціну показує калькулятор на сайті. Макет адаптуємо під машинну вишивку (напрям стібків, щільність), навіть якщо логотип ще не готовий до вишивки.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Який мінімальне замовлення?</summary>
+            <p>Працюємо від 3 виробів — для тесту, подарунка або пробного тиражу. На гуртових тиражах діють знижки.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Чи вишиваєте на моєму матеріалі?</summary>
+            <p>Так. Позначте в калькуляторі «Тільки вишивка / Матеріал клієнта» — ми вишиваємо на вашому одязі, а вартість виробу-основи не враховується.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Скільки часу займає виконання?</summary>
+            <p>Програму під макет готуємо за 1–2 дні. Терміни виробництва узгоджуємо одразу після розрахунку — вони залежать від тиражу та складності дизайну.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Доставляєте по Україні?</summary>
+            <p>Так, доставляємо по всій Україні. Цех — в Одесі, відвідування за попередньою домовленістю.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Як оформити замовлення?</summary>
+            <p>Напишіть через форму в розділі «Контакти», у Telegram або зателефонуйте — відповімо з розрахунком і наступними кроками.</p>
+          </details>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- 08. КОНТАКТИ ТА ПІДВАЛ -->
   <footer id="contacts" class="border-t border-white/[.08] bg-[#151618]">
     <div class="shell grid gap-12 py-16 lg:grid-cols-2 lg:gap-20 lg:py-20">
       <div>
-        <span class="eyebrow">04 / Розпочнімо проєкт</span>
+        <span class="eyebrow">05 / Розпочнімо проєкт</span>
         <h2 class="section-title mt-4">Маєте ідею?<br><span class="text-gold">Нумо вишивати.</span></h2>
         <p class="mt-5 max-w-md text-sm leading-7 text-muted">
           Розкажіть про завдання - допоможемо вибрати матеріал,
