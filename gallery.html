@@ -10,26 +10,7 @@
   <meta name="description" content="Роботи студії VARBUS: машинна вишивка на одязі, текстилі та мерчі. Фото і відео реальних проєктів.">
   <title>VARBUS — наші роботи</title>
 
-  <!-- Tailwind CSS. Для робочого сайту рекомендовано зібрати стилі локально. -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            ink: '#101112',
-            panel: '#191a1d',
-            gold: '#c7a574',
-            muted: '#a5a5ad'
-          },
-          fontFamily: {
-            sans: ['Manrope', 'sans-serif'],
-            display: ['Unbounded', 'sans-serif']
-          }
-        }
-      }
-    };
-  </script>
+  <link rel="stylesheet" href="styles.css">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -384,203 +365,203 @@
     const works = [
       {
         category: 'logo',
-        image: 'https://i.ibb.co/Wp2QJ9ny/photo-2026-09-16-11-49-40-2.jpg',
+        image: 'media/photos/photo-2026-09-16-11-49-40-2.jpg',
         images: [
-          'https://i.ibb.co/DDcWR5BF/photo-2026-09-16-11-49-41-cr.jpg',
-          'https://i.ibb.co/5x5jfhq2/photo-2026-09-16-11-49-41-2-cr.jpg',
-          'https://i.ibb.co/qMSFVmcR/photo-2026-09-16-11-50-29-2-cr-cr.jpg'
+          'media/photos/photo-2026-09-16-11-49-41-cr.jpg',
+          'media/photos/photo-2026-09-16-11-49-41-2-cr.jpg',
+          'media/photos/photo-2026-09-16-11-50-29-2-cr-cr.jpg'
         ],
         title: 'Обплетення на кермо',
         description: '49 750 стібків · 3 кольори'
       },
       {
         category: 'logo',
-        image: 'https://i.ibb.co/Fk2BRpQf/IMG-0907.jpg',
+        image: 'media/photos/IMG-0907.jpg',
         title: 'Знак Ом (або Аум, ॐ)',
         description: '265 х 265 · 64 200 стібків · 1 колір'
       },
       {
         category: 'clothes',
-        image: 'https://i.ibb.co/gLhxCpsN/IMG-0918.jpg',
+        image: 'media/photos/IMG-0918.jpg',
         title: 'Орнамент',
         description: '104 х 140 · 12 369 стібків · 2 кольори'
       },
       {
         category: 'patch',
-        image: 'https://i.ibb.co/WNwBFgdJ/IMG-0921-cr.jpg',
+        image: 'media/photos/IMG-0921-cr.jpg',
         title: '81 ОАеМБр',
         description: '67 х 79 · 15 992 стібків · 6 кольорів'
       },
       {
         category: 'text',
-        image: 'https://i.ibb.co/204kQx0x/IMG-0939-cr.jpg',
+        image: 'media/photos/IMG-0939-cr.jpg',
         images: [
-          'https://i.ibb.co/pvHSWvJR/image.jpg',
-          'https://i.ibb.co/WvnCcGkB/IMG-0926-cr.jpg'
+          'media/photos/image (1).jpg',
+          'media/photos/IMG-0926-cr.jpg'
         ],
         title: '9 figures loading...',
         description: '100 х 12 · 2 529 стібків · 1 колір'
       },
       {
         category: 'clothes',
-        image: 'https://i.ibb.co/PGDWzgFM/IMG-0917-cr.jpg',
+        image: 'media/photos/IMG-0917-cr.jpg',
         title: 'Орнамент_2'
       },
       {
         category: 'text',
-        image: 'https://i.ibb.co/27rXgJMF/IMG-0936-cr.jpg',
+        image: 'media/photos/IMG-0936-cr.jpg',
         images: [
-          'https://i.ibb.co/7NKnY9Tj/IMG-6942-1.jpg',
-          'https://i.ibb.co/Q7djwdL0/IMG-6932.jpg',
-          'https://i.ibb.co/V0PKTHxN/IMG-6939.jpg'
+          'media/photos/IMG-6942-1.jpg',
+          'media/photos/IMG-6932.jpg',
+          'media/photos/IMG-6939.jpg'
         ],
         title: 'Girl Club (white)',
         description: '264 х 100 · 31 382 стібків · 1 колір'
       },
       {
         category: 'logo',
-        image: 'https://i.ibb.co/PsyTDM1C/IMG-0938-cr.jpg',
+        image: 'media/photos/IMG-0938-cr.jpg',
         images: [
-          'https://i.ibb.co/bgD1FLmm/101.jpg',
-          'https://i.ibb.co/60ykx0vy/IMG-6935.jpg',
-          'https://i.ibb.co/WWX5s4Yf/IMG-7035-1.jpg'
+          'media/photos/101.jpg',
+          'media/photos/IMG-6935.jpg',
+          'media/photos/IMG-7035-1.jpg'
         ],
         title: 'Girl Club (black)',
         description: '86 х 100 · 15 564 стібків · 2 кольори'
       },
       {
         category: 'patch',
-        image: 'https://i.ibb.co/TDmRcMPW/IMG-0923-cr.jpg',
+        image: 'media/photos/IMG-0923-cr.jpg',
         title: 'Alfa Romeo',
         description: '91 х 91 · 20 975 стібків · 5 кольорів'
       },
       {
         category: 'logo',
-        image: 'https://i.ibb.co/svvP0Mf8/IMG-0900.jpg',
+        image: 'media/photos/IMG-0900.jpg',
         images: [
-          'https://i.ibb.co/svvP0Mf8/IMG-0900.jpg',
-          'https://i.ibb.co/Cppb5Jg9/IMG-0903-cr.jpg'
+          'media/photos/IMG-0900.jpg',
+          'media/photos/IMG-0903-cr.jpg'
         ],
         title: 'Radiology med',
         description: '47 х 55 · 5 046 стібків · 3 кольори'
       },
       {
         category: 'text',
-        image: 'https://i.ibb.co/9HQDxGLj/IMG-0914.jpg',
+        image: 'media/photos/IMG-0914.jpg',
         title: 'Агент УПА'
       },
       {
         category: 'logo',
-        image: 'https://i.ibb.co/rRm8c1TY/IMG-0929-cr.jpg',
+        image: 'media/photos/IMG-0929-cr.jpg',
         title: 'Myophysio',
         description: '103 х 59 · 4 040 стібків · 1 колір'
       },
       {
         category: 'patch',
-        image: 'https://i.ibb.co/xq0vJ0z3/IMG-0924.jpg',
+        image: 'media/photos/IMG-0924.jpg',
         title: 'BMW'
       },
       {
         category: 'clothes',
-        image: 'https://i.ibb.co/GvRvnDNJ/IMG-0928.jpg',
+        image: 'media/photos/IMG-0928.jpg',
         title: 'Орнамент_3'
       },
       {
         category: 'logo',
-        image: 'https://i.ibb.co/VY4syJdd/IMG-0935-cr.jpg',
+        image: 'media/photos/IMG-0935-cr.jpg',
         images: [
-          'https://i.ibb.co/7J5dRS7t/photo-2026-05-01-10-41-42.jpg',
-          'https://i.ibb.co/JjDcm52y/photo-2026-05-01-10-42-09.jpg',
-          'https://i.ibb.co/DfBfF1Tc/IMG-6940.jpg'
+          'media/photos/photo-2026-05-01-10-41-42.jpg',
+          'media/photos/photo-2026-05-01-10-42-09.jpg',
+          'media/photos/IMG-6940.jpg'
         ],
         title: 'Геральдичний символ (white)',
         description: '86 х 100 · 15 564 стібків · 2 кольори'
       },
       {
         category: 'logo',
-        image: 'https://i.ibb.co/HfCMqY4K/IMG-0913-cr.jpg',
+        image: 'media/photos/IMG-0913-cr.jpg',
         images: [
-          'https://i.ibb.co/h1ggGJVt/IMG-7656-cr.jpg',
-          'https://i.ibb.co/x8SfTV5p/IMG-0934.jpg'
+          'media/photos/IMG-7656-cr.jpg',
+          'media/photos/IMG-0934.jpg'
         ],
         title: 'Black cat',
         description: '170 х 150 · 23 295 стібків · 3 кольори'
       },
       {
         category: 'text',
-        image: 'https://i.ibb.co/PGCKVr2Y/IMG-0909.jpg',
+        image: 'media/photos/IMG-0909.jpg',
         images: [
-          'https://i.ibb.co/PGCKVr2Y/IMG-0909.jpg',
-          'https://i.ibb.co/Q7pf05Kh/Chat-GPT-Image-18-2026-12-45-38.png'
+          'media/photos/IMG-0909.jpg',
+          'media/photos/Chat-GPT-Image-18-2026-12-45-38.png'
         ],
         title: 'Eugenia',
         description: '100 х 31 · 3 919 стібків · 2 кольори'
       },
       {
         category: 'patch',
-        image: 'https://i.ibb.co/5g81j74K/IMG-0925.jpg',
+        image: 'media/photos/IMG-0925.jpg',
         title: 'UAF'
       },
       {
         category: 'text',
-        image: 'https://i.ibb.co/cXXJ4knk/photo-2026-09-16-11-50-29.jpg',
+        image: 'media/photos/photo-2026-09-16-11-50-29.jpg',
         title: 'Emilia',
         description: '254 х 129 · 25 884 стібків · 2 кольори'
       },
       {
         category: 'logo',
-        image: 'https://i.ibb.co/5gCSZ3Md/IMG-0912-cr.jpg',
+        image: 'media/photos/IMG-0912-cr.jpg',
         title: 'Odesa'
       },
       {
         category: 'logo',
-        image: 'https://i.ibb.co/D6W1xd7/IMG-0167.jpg',
+        image: 'media/photos/IMG-0167.jpg',
         title: 'Bad Boy',
         description: '250 х 106 · 13 795 стібків · 1 колір'
       },
       {
         category: 'patch',
-        image: 'https://i.ibb.co/gb94hdHW/IMG-0919-cr.jpg',
+        image: 'media/photos/IMG-0919-cr.jpg',
         title: 'Lexus cup'
       },
       {
         category: 'logo',
-        image: 'https://i.ibb.co/Hf13c1kn/IMG-0916-cr.jpg',
+        image: 'media/photos/IMG-0916-cr.jpg',
         title: 'Skull spiders'
       },
       {
         category: 'text',
-        image: 'https://i.ibb.co/mCLCFCf7/IMG-0931-cr.jpg',
+        image: 'media/photos/IMG-0931-cr.jpg',
         title: 'Meridian',
         description: '79 х 24 · 2 165 стібків · 1 колір'
       },
       {
         category: 'logo',
-        image: 'https://i.ibb.co/sJtMV19S/IMG-0908-cr.jpg',
+        image: 'media/photos/IMG-0908-cr.jpg',
         images: [
-          'https://i.ibb.co/sJtMV19S/IMG-0908-cr.jpg',
-          'https://i.ibb.co/Q7pf05Kh/Chat-GPT-Image-18-2026-12-45-38.png'
+          'media/photos/IMG-0908-cr.jpg',
+          'media/photos/Chat-GPT-Image-18-2026-12-45-38.png'
         ],
         title: 'Radiology (blue)',
         description: '47 х 55 · 5 046 стібків · 3 кольори'
       },
       {
         category: 'text',
-        image: 'https://i.ibb.co/G32ZdXrT/photo-2026-09-16-11-52-15-cr.jpg',
+        image: 'media/photos/photo-2026-09-16-11-52-15-cr.jpg',
         images: [
-          'https://i.ibb.co/G32ZdXrT/photo-2026-09-16-11-52-15-cr.jpg',
-          'https://i.ibb.co/zhc1pND4/IMG-7229-cr.jpg'
+          'media/photos/photo-2026-09-16-11-52-15-cr.jpg',
+          'media/photos/IMG-7229-cr.jpg'
         ],
         title: 'Adma',
         description: '62 х 13 · 1 518 стібків · 1 колір'
       },
       {
         category: 'text',
-        image: 'https://i.ibb.co/sdWr4qfH/photo-2026-05-01-10-43-48.jpg',
+        image: 'media/photos/photo-2026-05-01-10-43-48.jpg',
         images: [
-          'https://i.ibb.co/4ZGpzZJT/photo-2026-05-01-10-38-58.jpg',
-          'https://i.ibb.co/NdvMh388/photo-2026-05-01-10-38-45.jpg',
-          'https://i.ibb.co/4Zmj6vtr/IMG-6949.jpg'
+          'media/photos/photo-2026-05-01-10-38-58.jpg',
+          'media/photos/photo-2026-05-01-10-38-45.jpg',
+          'media/photos/IMG-6949.jpg'
         ],
         title: 'Offline',
         description: '120 х 25 · 1 828 стібків · 1 колір'
@@ -612,32 +593,32 @@
      */
     const videos = [
       {
-        poster: 'https://i.ibb.co/MkQXZjVF/image.jpg',
+        poster: 'media/photos/image.jpg',
         video: 'media/videos/emilia.mp4',
         title: 'Емілія'
       },
       {
-        poster: 'https://i.ibb.co/D6W1xd7/IMG-0167.jpg',
+        poster: 'media/photos/IMG-0167.jpg',
         video: 'media/videos/bad_boy.mp4',
         title: 'Bad Boy'
       },
       {
-        poster: 'https://i.ibb.co/XZ6HyYty/IMG-7355-cr.jpg',
+        poster: 'media/photos/IMG-7355-cr.jpg',
         video: 'media/videos/zal.mp4',
         title: 'Зал спортивний клуб'
       },
       {
-        poster: 'https://i.ibb.co/39FF7n7m/IMG-6788.jpg',
+        poster: 'media/photos/IMG-6788.jpg',
         video: 'media/videos/butterfly.mp4',
         title: 'Butterfly'
       },
       {
-        poster: 'https://i.ibb.co/Kg7HBTC/ukr.jpg',
+        poster: 'media/photos/ukr.jpg',
         video: 'media/videos/ukr.mp4',
         title: 'Герб України'
       },
       {
-        poster: 'https://i.ibb.co/YB2gtPcf/IMG-0926-cr.jpg',
+        poster: 'media/photos/IMG-0926-cr.jpg',
         video: 'media/videos/dollar.mp4',
         title: 'Символ доллара'
       },
@@ -705,6 +686,7 @@
         image.src = work.image;
         image.alt = work.title || 'Робота з машинної вишивки';
         image.loading = 'lazy';
+        image.decoding = 'async';
         image.addEventListener('error', () => {
           image.remove();
           figure.append(createMessage('Зображення недоступне'));
@@ -858,6 +840,7 @@
         image.src = video.poster;
         image.alt = `Обкладинка відео: ${video.title || 'без назви'}`;
         image.loading = 'lazy';
+        image.decoding = 'async';
 
         const badge = document.createElement('span');
         badge.className = 'play-badge';
