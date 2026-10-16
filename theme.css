@@ -1,0 +1,133 @@
+/* ============================================================
+   Світла тема VARBUS.
+   Підключається після styles.css. Правила мають вищу специфічність
+   (html.light …), тому перекривають і кастомні класи, і утиліти Tailwind.
+   Темна тема лишається без змін.
+   ============================================================ */
+
+html.light { color-scheme: light; }
+html.light body {
+  background-color: #f7f5f1;
+  color: #1a1b1e;
+}
+
+/* --- Фон/поверхні --- */
+html.light .bg-ink { background-color: #f7f5f1; }
+html.light .bg-ink\/95 { background-color: rgba(247, 245, 241, .92); }
+html.light .bg-ink\/50 { background-color: rgba(255, 255, 255, .65); }
+html.light .bg-panel { background-color: #ffffff; }
+html.light .bg-\[\#151618\] { background-color: #f1eee8; }
+html.light .bg-\[\#141517\] { background-color: #efece5; }
+html.light .bg-\[\#121315\]\/95 { background-color: rgba(247, 245, 241, .95); }
+html.light .bg-white\/5 { background-color: rgba(17, 18, 20, .045); }
+html.light .hover\:bg-white\/5:hover { background-color: rgba(17, 18, 20, .05); }
+html.light .bg-white\/\[\.02\] { background-color: rgba(17, 18, 20, .02); }
+html.light .bg-gold\/5 { background-color: rgba(169, 129, 63, .09); }
+html.light .bg-gold\/\[\.045\] { background-color: rgba(169, 129, 63, .08); }
+
+/* --- Текст --- */
+html.light .text-white { color: #17181a; }
+html.light .text-white\/50 { color: rgba(23, 24, 26, .55); }
+html.light .text-gray-300 { color: #3a3b40; }
+html.light .text-gray-400 { color: #54555d; }
+html.light .text-muted { color: #5f5f6a; }
+html.light .text-gold { color: #a9813f; }
+html.light .hover\:text-gold:hover { color: #8f6a2f; }
+html.light .text-red-300 { color: #b3261e; }
+
+/* --- Межі --- */
+html.light .border-white\/\[\.07\] { border-color: rgba(17, 18, 20, .10); }
+html.light .border-white\/\[\.08\] { border-color: rgba(17, 18, 20, .10); }
+html.light .border-white\/10 { border-color: rgba(17, 18, 20, .14); }
+html.light .border-white\/20 { border-color: rgba(17, 18, 20, .22); }
+html.light .border-gold\/20 { border-color: rgba(169, 129, 63, .30); }
+html.light .border-gold\/25 { border-color: rgba(169, 129, 63, .35); }
+html.light .border-gold\/30 { border-color: rgba(169, 129, 63, .40); }
+html.light .border-gold\/40 { border-color: rgba(169, 129, 63, .50); }
+
+/* --- Тіні --- */
+html.light .shadow-black\/20 { --tw-shadow-color: rgba(17, 18, 20, .12); }
+
+/* --- Кастомні компоненти --- */
+html.light .eyebrow { color: #a9813f; }
+html.light .button-outline {
+  border-color: rgba(17, 18, 20, .16);
+  background: rgba(17, 18, 20, .03);
+}
+html.light .button-outline:hover {
+  border-color: rgba(169, 129, 63, .55);
+  background: rgba(169, 129, 63, .08);
+}
+html.light .social-icon { border-color: rgba(17, 18, 20, .14); }
+html.light .social-icon:hover {
+  background: rgba(169, 129, 63, .10);
+  border-color: rgba(169, 129, 63, .5);
+}
+html.light .field {
+  background: #ffffff;
+  color: #1a1b1e;
+  border-color: rgba(17, 18, 20, .16);
+}
+html.light .field:disabled { color: #6b6b73; background-color: #f0ede7; }
+html.light .field::placeholder { color: #8a8a92; }
+html.light .field-label { color: #4a4b52; }
+html.light .service-card {
+  background: #ffffff;
+  border-color: rgba(17, 18, 20, .10);
+}
+html.light .portfolio-card { background: #eceae4; }
+html.light .upload-zone {
+  background: radial-gradient(ellipse at top, rgba(169, 129, 63, .09), transparent 75%), #ffffff;
+  border-color: rgba(169, 129, 63, .45);
+}
+html.light .upload-zone:hover,
+html.light .upload-zone.is-dragging { background-color: #f6f1e8; border-color: #a9813f; }
+html.light .faq-item { background: #ffffff; border-color: rgba(17, 18, 20, .10); }
+html.light .faq-item summary:hover { color: #8f6a2f; }
+html.light .faq-item summary::after { color: #a9813f; }
+html.light .faq-item p { color: #54555d; }
+
+/* --- Головний екран: світлий серпанок поверх фото --- */
+html.light .hero-overlay {
+  background:
+    linear-gradient(90deg, rgba(247, 245, 241, .94), rgba(247, 245, 241, .74)),
+    linear-gradient(0deg, #f7f5f1, transparent 55%);
+}
+
+/* --- Картки робіт лишаються «темними фото»: світлий текст поверх зображень --- */
+html.light .service-card { color: #f6f6f6; }
+html.light .service-card .text-gray-400 { color: rgba(255, 255, 255, .8); }
+html.light .service-card .text-white\/50 { color: rgba(255, 255, 255, .62); }
+html.light .portfolio-caption { color: #f6f6f6; }
+html.light .portfolio-caption .text-gray-300 { color: rgba(255, 255, 255, .82); }
+html.light .portfolio-caption .text-gold { color: #d9b988; }
+
+/* --- Галерея: фільтри, повідомлення, відео, лайтбокс --- */
+html.light .filter {
+  border-color: rgba(17, 18, 20, .16);
+  background: rgba(17, 18, 20, .03);
+  color: #54555d;
+}
+html.light .filter:hover,
+html.light .filter.active {
+  background: #a9813f;
+  color: #101112;
+  border-color: #a9813f;
+}
+html.light .gallery-message {
+  border-color: rgba(17, 18, 20, .10);
+  color: #54555d;
+}
+html.light .video-label { color: #f6f6f6; }
+html.light .video-label .text-gold { color: #d9b988; }
+html.light .lightbox { color: #f5f5f5; }
+
+/* --- Перемикач теми --- */
+#themeToggle { cursor: pointer; }
+#themeToggle .icon-moon { display: none; }
+html.light #themeToggle .icon-moon { display: inline-block; }
+html.light #themeToggle .icon-sun { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html.light *, html.light *::before, html.light *::after { transition: none !important; }
+}

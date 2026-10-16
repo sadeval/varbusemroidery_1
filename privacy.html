@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="uk" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101112">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('theme');
+        if (!saved) {
+          saved = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        if (saved === 'light') document.documentElement.classList.add('light');
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=4">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=4">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=4">
+  <meta name="robots" content="index,follow">
+  <meta name="description" content="Політика конфіденційності студії VARBUS: які дані ми збираємо, з якою метою, кому передаємо та як захищаємо.">
+  <title>Політика конфіденційності — VARBUS</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+</head>
+
+<body class="bg-ink font-sans text-white antialiased">
+  <header class="sticky top-0 z-50 border-b border-white/[.08] bg-ink/95 backdrop-blur-xl">
+    <div class="shell flex h-20 items-center justify-between gap-3">
+      <a href="index.html" class="flex shrink-0 items-center gap-3" aria-label="VARBUS - на головну">
+        <span class="flex h-10 w-10 items-center justify-center rounded-lg border border-gold/40 text-gold">
+          <i data-lucide="scan-line" class="h-6 w-6" aria-hidden="true"></i>
+        </span>
+        <span>
+          <span class="block font-display text-lg font-semibold tracking-[-.07em]">VARBUS<span class="text-gold">/</span></span>
+          <span class="block text-[8px] font-bold tracking-[.17em] text-muted">ПРОМИСЛОВА ВИШИВКА</span>
+        </span>
+      </a>
+
+      <div class="flex items-center gap-2 sm:gap-4">
+        <button id="themeToggle" type="button" class="social-icon" aria-label="Перемкнути тему" title="Світла / темна тема">
+          <i data-lucide="sun" class="icon-sun h-4 w-4" aria-hidden="true"></i>
+          <i data-lucide="moon" class="icon-moon h-4 w-4" aria-hidden="true"></i>
+        </button>
+        <a href="index.html" class="button button-outline">
+          <i data-lucide="arrow-left" class="h-4 w-4 text-gold" aria-hidden="true"></i> На головну
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="py-16 lg:py-24">
+      <div class="shell">
+        <div class="mx-auto max-w-3xl rounded-3xl border border-white/[.08] bg-white/[.02] p-6 sm:p-10">
+        <span class="eyebrow">Документи</span>
+        <h1 class="section-title mt-4">Політика<br><span class="text-muted">конфіденційності.</span></h1>
+        <p class="mt-6 text-sm leading-7 text-muted">
+          Ми поважаємо вашу приватність і обробляємо персональні дані відповідно до Закону України
+          «Про захист персональних даних». Ця сторінка пояснює, які дані ми збираємо, навіщо,
+          кому передаємо та як ви можете керувати ними.
+        </p>
+        <p class="mt-2 text-xs leading-6 text-muted">Останнє оновлення: жовтень 2026.</p>
+
+        <div class="mt-10 space-y-9 text-sm leading-7 text-muted">
+          <div>
+            <h2 class="text-white text-base font-bold">1. Хто ми</h2>
+            <p class="mt-3">
+              VARBUS — студія промислової машинної вишивки (брендування одягу, шеврони, корпоративний текстиль).
+              Цех розташований в Одесі. Контакти для питань щодо даних наведені в розділі 8.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-white text-base font-bold">2. Які дані ми збираємо</h2>
+            <ul class="mt-3 list-disc space-y-2 pl-5">
+              <li>дані, які ви залишаєте у формі заявки: ім’я, телефон або електронна пошта, опис замовлення;</li>
+              <li>за вашим бажанням — файл макета (зображення) для оцінки та підготовки вишивки;</li>
+              <li>технічні дані, що автоматично передає браузер (дата й час звернення), для захисту від спаму.</li>
+            </ul>
+            <p class="mt-3">
+              Ми не збираємо платіжні дані та не вимагаємо документів, що посвідчують особу.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-white text-base font-bold">3. Мета обробки</h2>
+            <p class="mt-3">
+              Дані використовуються виключно для обробки вашої заявки: відповіді на запит, розрахунку вартості,
+              узгодження деталей і виконання замовлення. Ми не надсилаємо рекламні розсилки без окремої згоди.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-white text-base font-bold">4. Правова підстава</h2>
+            <p class="mt-3">
+              Обробка здійснюється на підставі вашої згоди, яку ви надаєте, позначаючи відповідний прапорець
+              у формі заявки перед її надсиланням.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-white text-base font-bold">5. Кому ми передаємо дані</h2>
+            <p class="mt-3">Для роботи сайту ми використовуємо сторонні сервіси-обробники:</p>
+            <ul class="mt-3 list-disc space-y-2 pl-5">
+              <li><span class="text-white">Google</span> (Google Таблиці та Apps Script) — зберігання заявок; для попередньої оцінки макета може залучатися аналіз зображення;</li>
+              <li><span class="text-white">Telegram</span> — миттєве сповіщення студії про нову заявку;</li>
+              <li><span class="text-white">Netlify</span> — хостинг сайту та серверна обробка заявок.</li>
+            </ul>
+            <p class="mt-3">
+              Ми не продаємо та не передаємо ваші дані третім особам у маркетингових цілях.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-white text-base font-bold">6. Зберігання та захист</h2>
+            <p class="mt-3">
+              Дані зберігаються не довше, ніж потрібно для обробки замовлення та виконання вимог законодавства.
+              Передача даних відбувається захищеним з’єднанням (HTTPS). Токени доступу до сервісів зберігаються
+              на сервері та не публікуються у коді сторінки.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-white text-base font-bold">7. Ваші права та файли cookie</h2>
+            <p class="mt-3">
+              Ви можете попросити доступ, виправлення або видалення ваших даних, а також відкликати згоду,
+              звернувшись за контактами нижче. Сайт не використовує рекламних cookie; у локальному сховищі
+              браузера зберігається лише ваша тема оформлення (світла/темна).
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-white text-base font-bold">8. Контакти</h2>
+            <p class="mt-3">
+              З питань персональних даних пишіть: <span class="text-white">sadeval2011@gmail.com</span><br>
+              Телефон: <span class="text-white">+38 (095) 528-98-73</span><br>
+              Адреса: вулиця Гранітна, 1, Одеса, Одеська область, 65125
+            </p>
+          </div>
+        </div>
+
+        <a href="index.html" class="button button-gold mt-10">
+          Повернутися на головну
+          <i data-lucide="arrow-up-right" class="h-4 w-4" aria-hidden="true"></i>
+        </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-white/[.08]">
+    <div class="shell flex flex-col justify-between gap-4 py-6 text-[10px] text-muted sm:flex-row sm:items-center">
+      <a href="index.html" class="font-display text-sm font-semibold tracking-tight text-white">VARBUS<span class="text-gold">/</span></a>
+      <p>© <span id="currentYear"></span> VARBUS. Усі права захищено.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) window.lucide.createIcons();
+      document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+      const themeToggle = document.getElementById('themeToggle');
+      if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+          const isLight = document.documentElement.classList.toggle('light');
+          try { localStorage.setItem('theme', isLight ? 'light' : 'dark'); } catch (e) {}
+        });
+      }
+    });
+  </script>
+</body>
+</html>

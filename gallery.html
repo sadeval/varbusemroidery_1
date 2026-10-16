@@ -4,6 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#101112">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('theme');
+        if (!saved) {
+          saved = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        if (saved === 'light') document.documentElement.classList.add('light');
+      } catch (e) {}
+    })();
+  </script>
   <link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=4">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=4">
   <link rel="apple-touch-icon" href="apple-touch-icon.png?v=4">
@@ -166,6 +177,7 @@
   </style>
 
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="theme.css">
 
   <script type="application/ld+json">
   {
@@ -215,6 +227,10 @@
           Розрахувати замовлення
           <i data-lucide="arrow-up-right" class="h-4 w-4" aria-hidden="true"></i>
         </a>
+        <button id="themeToggle" type="button" class="social-icon" aria-label="Перемкнути тему" title="Світла / темна тема">
+          <i data-lucide="sun" class="icon-sun h-4 w-4" aria-hidden="true"></i>
+          <i data-lucide="moon" class="icon-moon h-4 w-4" aria-hidden="true"></i>
+        </button>
         <button id="menuButton" type="button" class="social-icon xl:hidden"
                 aria-label="Відкрити меню" aria-expanded="false" aria-controls="mobileMenu">
           <i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i>
@@ -330,7 +346,7 @@
 
     <div class="border-t border-white/[.08]">
       <div class="shell flex flex-col justify-between gap-4 py-6 text-[10px] text-muted sm:flex-row sm:items-center">
-        <p>© <span id="currentYear"></span> VARBUS. Усі права захищено.</p>
+        <p>© <span id="currentYear"></span> VARBUS. Усі права захищено. <a href="privacy.html" class="hover:text-gold">Політика конфіденційності</a></p>
         <a href="index.html" class="flex items-center gap-2 hover:text-gold">
           На головну
           <i data-lucide="arrow-up-right" class="h-3 w-3" aria-hidden="true"></i>
@@ -651,6 +667,15 @@
     document.addEventListener('DOMContentLoaded', () => {
       if (window.lucide) window.lucide.createIcons();
       document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+      // Перемикач світлої / темної теми.
+      const themeToggle = document.getElementById('themeToggle');
+      if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+          const isLight = document.documentElement.classList.toggle('light');
+          try { localStorage.setItem('theme', isLight ? 'light' : 'dark'); } catch (e) {}
+        });
+      }
 
       const menuButton = document.getElementById('menuButton');
       const mobileMenu = document.getElementById('mobileMenu');

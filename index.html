@@ -4,6 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#101112">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('theme');
+        if (!saved) {
+          saved = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        if (saved === 'light') document.documentElement.classList.add('light');
+      } catch (e) {}
+    })();
+  </script>
   <link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=4">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=4">
   <link rel="apple-touch-icon" href="apple-touch-icon.png?v=4">
@@ -173,6 +184,7 @@
   </style>
 
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="theme.css">
 
   <script type="application/ld+json">
   {
@@ -313,6 +325,10 @@
         <a data-social="instagram" href="#contacts" class="social-icon" aria-label="Переглянути Instagram студії" title="Instagram">
           <i data-lucide="instagram" class="h-4 w-4" aria-hidden="true"></i>
         </a>
+        <button id="themeToggle" type="button" class="social-icon" aria-label="Перемкнути тему" title="Світла / темна тема">
+          <i data-lucide="sun" class="icon-sun h-4 w-4" aria-hidden="true"></i>
+          <i data-lucide="moon" class="icon-moon h-4 w-4" aria-hidden="true"></i>
+        </button>
         <a href="#calculator" class="button button-gold hidden sm:inline-flex">
           Розрахувати замовлення
           <i data-lucide="arrow-up-right" class="h-4 w-4" aria-hidden="true"></i>
@@ -909,10 +925,15 @@
           </div>
         </div>
 
+        <label class="sr-only" aria-hidden="true">
+          Компанія
+          <input id="company" name="company" type="text" tabindex="-1" autocomplete="off">
+        </label>
+
         <label class="mt-5 flex cursor-pointer items-start gap-3">
           <input type="checkbox" name="consent" class="mt-1 h-4 w-4 shrink-0 accent-[#c7a574]" required>
           <span class="text-[10px] leading-5 text-muted">
-            Погоджуюся на використання вказаних контактів для відповіді на мою заявку.
+            Погоджуюся з <a href="privacy.html" class="text-gold hover:underline">політикою конфіденційності</a> та на обробку вказаних контактів для відповіді на мою заявку.
           </span>
         </label>
 
@@ -930,7 +951,7 @@
     <div class="border-t border-white/[.08]">
       <div class="shell flex flex-col justify-between gap-4 py-6 text-[10px] text-muted sm:flex-row sm:items-center">
         <a href="#" class="font-display text-sm font-semibold tracking-tight text-white">VARBUS<span class="text-gold">/</span></a>
-        <p>© <span id="currentYear"></span> VARBUS. Усі права захищено.</p>
+        <p>© <span id="currentYear"></span> VARBUS. Усі права захищено. <a href="privacy.html" class="hover:text-gold">Політика конфіденційності</a></p>
         <a href="#calculator" class="flex items-center gap-2 hover:text-gold">
           Від пікселя до стібка
           <i data-lucide="arrow-up-right" class="h-3 w-3" aria-hidden="true"></i>
@@ -951,6 +972,15 @@
       if (window.lucide) window.lucide.createIcons();
 
       const $ = (id) => document.getElementById(id);
+
+      // Перемикач світлої / темної теми.
+      const themeToggle = $('themeToggle');
+      if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+          const isLight = document.documentElement.classList.toggle('light');
+          try { localStorage.setItem('theme', isLight ? 'light' : 'dark'); } catch (e) {}
+        });
+      }
 
       /*
        * ЄДИНА КОНФІГУРАЦІЯ КОНТАКТІВ.
@@ -974,23 +1004,19 @@
 
       /*
        * РОБОЧІ ПОСИЛАННЯ ДЛЯ FETCH-ЗАПИТІВ.
-       * Всі запити йдуть через ваш веб-застосунок Apps Script (проксі):
-       * він ховає ключ OpenAI від відвідувачів сторінки.
+       * Всі запити йдуть через серверні проксі, тому ключі й токени
+       * не потрапляють у код сторінки.
        *
        * backendUrl        — посилання на веб-застосунок Apps Script
        *                     (аналіз макета + запис лидів у Google Таблицю)
-       * telegramBotToken  — токен бота, який ви створили у @BotFather
-       * telegramChatId    — ваш chat id (приклад: 123456789)
-       *
-       * Ключ OpenAI та модель задаються в Apps Script (Script properties),
-       * а не в цьому файлі.
+       * telegramEndpoint  — серверна функція Netlify для заявок у Telegram
+       *                     (токен бота зберігається у змінних середовища Netlify)
        *
        * Поки поле порожнє — відповідна функція працює в демо-режимі без сервера.
        */
       const INTEGRATIONS = {
         backendUrl: 'https://script.google.com/macros/s/AKfycby6cVU2IB3lw2FiVjUPyYepXQ9n9ctKpkPTjNGNXqXzYNIyfdscwKyIpKOW13kGKp4w/exec',
-        telegramBotToken: '1471372087:AAGVgh-VcLg_yJreqYvBWYpCWJ15sOi5_28',
-        telegramChatId: '1205608173'
+        telegramEndpoint: '/.netlify/functions/telegram'
       };
 
       /*
@@ -1684,56 +1710,19 @@
         if (!result.ok) throw new Error(result.error || 'Не вдалося записати в Таблицю');
       }
 
-      /* Пряма відправка замовлення в Telegram-бот (без фото, якщо макет не завантажений). */
-      function tgEscape(text) {
-        return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-      }
-      async function sendOrderToTelegram(name, contact, message, calc) {
-        const text = [
-          '🔔 Нова заявка на вишивку',
-          `Ім’я: ${name}`,
-          `Контакт: ${contact}`,
-          '',
-          `Замовлення:`,
-          message,
-          calc ? `\nРозрахунок:\n${calc}` : ''
-        ].join('\n');
-
-        const response = await fetch(
-          `https://api.telegram.org/bot${INTEGRATIONS.telegramBotToken}/sendMessage`,
-          {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              chat_id: INTEGRATIONS.telegramChatId,
-              text,
-              disable_web_page_preview: true
-            })
-          }
-        );
-        const result = await response.json();
+      /*
+       * Відправка заявки в Telegram через серверну функцію Netlify.
+       * Токен бота зберігається у змінних середовища Netlify і не видно у коді.
+       */
+      async function sendOrderToTelegram(payload) {
+        const response = await fetch(INTEGRATIONS.telegramEndpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const result = await response.json().catch(() => ({}));
         if (!response.ok || !result.ok) {
-          throw new Error(result.description || `Telegram: HTTP ${response.status}`);
-        }
-      }
-
-      /* Відправка макета (картинки) в Telegram-бот разом із заявкою. */
-      async function sendOrderPhotoToTelegram(imageDataURL, caption) {
-        const blob = await (await fetch(imageDataURL)).blob();
-        const form = new FormData();
-        form.append('chat_id', INTEGRATIONS.telegramChatId);
-        form.append('photo', blob, 'maket.jpg');
-        form.append('caption', caption);
-        form.append('parse_mode', 'HTML');
-        form.append('disable_web_page_preview', true);
-
-        const response = await fetch(
-          `https://api.telegram.org/bot${INTEGRATIONS.telegramBotToken}/sendPhoto`,
-          { method: 'POST', body: form }
-        );
-        const result = await response.json();
-        if (!response.ok || !result.ok) {
-          throw new Error(result.description || `Telegram фото: HTTP ${response.status}`);
+          throw new Error(result.error || `Telegram: HTTP ${response.status}`);
         }
       }
 
@@ -1749,7 +1738,7 @@
           return;
         }
 
-        if (!INTEGRATIONS.backendUrl && !INTEGRATIONS.telegramBotToken) {
+        if (!INTEGRATIONS.backendUrl && !INTEGRATIONS.telegramEndpoint) {
           $('contactStatus').textContent =
             'Демонстраційний режим: заявку не надіслано. Заповніть INTEGRATIONS у файлі.';
           return;
@@ -1770,21 +1759,16 @@
           }
         }
 
-        if (INTEGRATIONS.telegramBotToken && INTEGRATIONS.telegramChatId) {
+        if (INTEGRATIONS.telegramEndpoint) {
           try {
-            const caption = [
-              '<b>🔔 Нова заявка на вишивку</b>',
-              `Ім’я: ${tgEscape(name)}`,
-              `Контакт: ${tgEscape(contact)}`,
-              '',
-              `<i>Замовлення:</i>\n${tgEscape(message)}`,
-              calc ? `\n<i>Розрахунок:</i>\n${tgEscape(calc)}` : ''
-            ].join('\n');
-            if (latestImageDataURL) {
-              await sendOrderPhotoToTelegram(latestImageDataURL, caption);
-            } else {
-              await sendOrderToTelegram(name, contact, message, calc);
-            }
+            await sendOrderToTelegram({
+              name,
+              contact,
+              message,
+              calc,
+              image: latestImageDataURL || '',
+              hp: $('company').value
+            });
           } catch (err) {
             errors.push(err.message);
           }
