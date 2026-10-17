@@ -71,6 +71,11 @@
         linear-gradient(90deg, #101112 1%, #101112ed 30%, #10111280 68%, #10111240),
         linear-gradient(0deg, #101112, transparent 60%);
     }
+    html.light .hero-overlay {
+      background:
+        linear-gradient(90deg, #f7f5f1 1%, #f7f5f1e8 30%, #f7f5f199 68%, #f7f5f140),
+        linear-gradient(0deg, #f7f5f1, transparent 60%);
+    }
     .hero-title {
       font-family: 'Unbounded', sans-serif;
       font-size: clamp(33px, 5.1vw, 68px);
@@ -171,6 +176,10 @@
       .hero-overlay {
         background: linear-gradient(90deg, #101112ed, #10111299),
                     linear-gradient(0deg, #101112, transparent);
+      }
+      html.light .hero-overlay {
+        background: linear-gradient(90deg, #f7f5f1e8, #f7f5f199),
+                    linear-gradient(0deg, #f7f5f1, transparent);
       }
       .service-card { min-height: 300px; }
     }
@@ -824,7 +833,7 @@
           </details>
 
           <details class="faq-item">
-            <summary>Який мінімальне замовлення?</summary>
+            <summary>Яке мінімальне замовлення?</summary>
             <p>Працюємо від 3 виробів — для тесту, подарунка або пробного тиражу. На гуртових тиражах діють знижки.</p>
           </details>
 
@@ -839,7 +848,7 @@
           </details>
 
           <details class="faq-item">
-            <summary>Доставляєте по Україні?</summary>
+            <summary>Чи доставляєте по Україні?</summary>
             <p>Так, доставляємо по всій Україні. Цех — в Одесі, відвідування за попередньою домовленістю.</p>
           </details>
 
