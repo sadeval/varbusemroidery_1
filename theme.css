@@ -87,13 +87,6 @@ html.light .faq-item summary:hover { color: #8f6a2f; }
 html.light .faq-item summary::after { color: #a9813f; }
 html.light .faq-item p { color: #54555d; }
 
-/* --- Головний екран: світлий серпанок поверх фото --- */
-html.light .hero-overlay {
-  background:
-    linear-gradient(90deg, rgba(247, 245, 241, .94), rgba(247, 245, 241, .74)),
-    linear-gradient(0deg, #f7f5f1, transparent 55%);
-}
-
 /* --- Картки робіт лишаються «темними фото»: світлий текст поверх зображень --- */
 html.light .service-card { color: #f6f6f6; }
 html.light .service-card .text-gray-400 { color: rgba(255, 255, 255, .8); }

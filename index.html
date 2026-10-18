@@ -71,10 +71,18 @@
         linear-gradient(90deg, #101112 1%, #101112ed 30%, #10111280 68%, #10111240),
         linear-gradient(0deg, #101112, transparent 60%);
     }
-    html.light .hero-overlay {
-      background:
-        linear-gradient(90deg, #f7f5f1 1%, #f7f5f1e8 30%, #f7f5f199 68%, #f7f5f140),
-        linear-gradient(0deg, #f7f5f1, transparent 60%);
+    /* Перший екран лишається темним в обох темах, щоб фото виглядало соковито. */
+    html.light .hero-dark { color: #f5f5f5; }
+    html.light .hero-dark .text-gray-300 { color: rgba(255, 255, 255, .8); }
+    html.light .hero-dark .text-muted { color: rgba(255, 255, 255, .66); }
+    html.light .hero-dark .text-gold { color: #dcbb8b; }
+    html.light .hero-dark .button-outline {
+      border-color: rgba(255, 255, 255, .28);
+      background: rgba(255, 255, 255, .05);
+    }
+    html.light .hero-dark .button-outline:hover {
+      border-color: rgba(199, 165, 116, .75);
+      background: rgba(199, 165, 116, .14);
     }
     .hero-title {
       font-family: 'Unbounded', sans-serif;
@@ -176,10 +184,6 @@
       .hero-overlay {
         background: linear-gradient(90deg, #101112ed, #10111299),
                     linear-gradient(0deg, #101112, transparent);
-      }
-      html.light .hero-overlay {
-        background: linear-gradient(90deg, #f7f5f1e8, #f7f5f199),
-                    linear-gradient(0deg, #f7f5f1, transparent);
       }
       .service-card { min-height: 300px; }
     }
@@ -373,7 +377,7 @@
 
   <main id="main">
     <!-- 02. ПЕРШИЙ ЕКРАН -->
-    <section class="relative isolate overflow-hidden">
+    <section class="relative isolate overflow-hidden hero-dark">
       <div class="absolute inset-0 -z-10">
         <!-- ИНСТРУКЦИЯ: Замените эту ссылку на ваше реальное фото вышивки/цеха -->
         <img
